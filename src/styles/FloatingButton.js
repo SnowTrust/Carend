@@ -14,8 +14,16 @@ const FloattingButtonStyle = () => {
             justifyContent: 'center',
             alignItems: 'center',
             zIndex: 3,
-            right: 20,
-            bottom: Math.ceil(NAVIGATION_BAR) + 50
+            right: 15,
+            bottom: Math.ceil(NAVIGATION_BAR) + 15,
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
         }
     })
 }
