@@ -32,7 +32,7 @@ const HomeStyle = () => {
             flexDirection: "row",
             paddingLeft: 10,
             paddingRight: 50,
-            marginBottom: 5
+            marginBottom: 20
         },
         notebookHeaderText: {
             flex: 4,
@@ -46,24 +46,31 @@ const HomeStyle = () => {
         },
         notebookListViewContainer: {
             flex: 4,
-            paddingLeft: 10
+            paddingLeft: 15
         },
         activeYearCard: {
             backgroundColor: colors.primary,
             color: colors.background
         },
-        card: {
-            backgroundColor: colors.card
-        },
-        cardIcon: {
+        yearCard: {
+            backgroundColor: colors.card,
             color: colors.notification
         },
-        descriptionText: {
-            color: colors.notification
+        entriesContainer: {
+            flex: 1,
+            marginTop: 25
         },
-        text: {
-            color: colors.text
+        entriesHeaderText: {
+            flex: 1,
+            fontFamily: Poppins.SemiBold,
+            fontSize: 18,
+            marginLeft: 10,
+            marginBottom: 20
         },
+        entriesListViewContainer: {
+            flex: 4,
+            paddingLeft: 15,
+        }
     })
 };
 
