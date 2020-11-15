@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 const Navigation = () => {
     return (
-        <Stack.Navigator initialRouteName="Home" headerMode='none'>
+        <Stack.Navigator initialRouteName="Settings" headerMode='none'>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Write" component={Write} />
             <Stack.Screen name="Welcome" component={Welcome} />
