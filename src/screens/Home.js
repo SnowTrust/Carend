@@ -29,8 +29,8 @@ const Home = () => {
   const { colors } = useTheme();
   return (
     <>
-      <FloatingButton />
-      <ScrollView 
+      { /* <FloatingButton /> */}
+      <ScrollView
         style={style.container}
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}>
@@ -82,7 +82,7 @@ const Home = () => {
           </View>
         </View>
       </ScrollView>
-      </>
+    </>
   );
 };
 

@@ -70,6 +70,7 @@ const HomeStyle = () => {
         entriesListViewContainer: {
             flex: 4,
             paddingLeft: 15,
+            alignItems: "center"
         }
     })
 };
