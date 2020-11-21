@@ -1,9 +1,10 @@
 import React from 'react';
-import {Text, View, ScrollView, FlatList} from 'react-native';
+import {Text, View, FlatList} from 'react-native';
 import HomeStyle from '../styles/Home';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '@react-navigation/native';
 import {Icon} from 'react-native-eva-icons';
+import {useDimensions} from '@react-native-community/hooks';
 import NoteBookCard from '../components/NoteBookCard';
 import EntryCard from '../components/EntryCard';
 import FloatingButton from '../components/FloatingButton';
@@ -27,10 +28,12 @@ const Home = () => {
   const navigation = useNavigation();
   const style = HomeStyle();
   const {colors} = useTheme();
+  const {width} = useDimensions().window;
+  const colNumber = ~~(width / 310);
   return (
     <>
-      {/* <FloatingButton /> */}
-      <ScrollView
+      <FloatingButton />
+      <View
         style={style.container}
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}>
@@ -58,30 +61,34 @@ const Home = () => {
               onPress={() => navigation.navigate('Settings')}
             />
           </View>
-          <FlatList
-            horizontal
-            style={style.notebookListViewContainer}
-            data={data}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => {
-              console;
-              return <NoteBookCard entries={item.entries} year={item.year} />;
-            }}
-            keyExtractor={(item) => String(item.year)}
-          />
+          <View style={style.notebookListViewContainer}>
+            <FlatList
+              horizontal
+              data={data}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item}) => {
+                return <NoteBookCard entries={item.entries} year={item.year} />;
+              }}
+              keyExtractor={(item) => String(item.year)}
+            />
+          </View>
         </View>
         {/* Entries */}
         <View style={style.entriesContainer}>
           <Text style={style.entriesHeaderText}>Recent Entries</Text>
           <View style={style.entriesListViewContainer}>
-            {dataEntries.map((item) => {
-              return (
-                <EntryCard key={item.id} hour={item.hour} date={item.date} />
-              );
-            })}
+            <FlatList
+              data={dataEntries}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item}) => {
+                return <EntryCard hour={item.hour} date={item.date} />;
+              }}
+              keyExtractor={(item) => String(item.id)}
+              numColumns={colNumber}
+            />
           </View>
         </View>
-      </ScrollView>
+      </View>
     </>
   );
 };

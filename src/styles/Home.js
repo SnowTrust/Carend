@@ -25,17 +25,17 @@ const HomeStyle = () => {
       flex: 1,
     },
     notebookContainer: {
-      flex: 1,
+      flex: 3,
     },
     notebookHeaderContainer: {
       flex: 1,
       flexDirection: 'row',
       paddingLeft: 10,
       paddingRight: 50,
-      marginBottom: 20,
+      marginBottom: 5,
     },
     notebookHeaderText: {
-      flex: 4,
+      flex: 1,
       fontFamily: Poppins.SemiBold,
       fontSize: 18,
     },
@@ -45,7 +45,7 @@ const HomeStyle = () => {
       alignItems: 'center',
     },
     notebookListViewContainer: {
-      flex: 4,
+      flex: 7,
       paddingLeft: 15,
     },
     activeYearCard: {
@@ -57,18 +57,17 @@ const HomeStyle = () => {
       color: colors.notification,
     },
     entriesContainer: {
-      flex: 1,
-      marginTop: 25,
+      flex: 6,
+      marginTop: 10,
     },
     entriesHeaderText: {
       flex: 1,
       fontFamily: Poppins.SemiBold,
       fontSize: 18,
       marginLeft: 10,
-      marginBottom: 20,
     },
     entriesListViewContainer: {
-      flex: 4,
+      flex: 9,
       paddingLeft: 15,
       alignItems: 'center',
     },

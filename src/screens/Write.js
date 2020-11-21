@@ -10,6 +10,7 @@ import WriteStyle from '../styles/Write';
 import Emoji from 'react-native-emoji';
 import WritingBox from '../components/WritingBox';
 import MoodList from '../utils/MoodList';
+import helpText from "../utils/HelperText";
 
 const Write = (props) => {
   const {_mood, _note, _id, _date} = props?.route?.params || {};
@@ -23,35 +24,36 @@ const Write = (props) => {
   const style = WriteStyle();
 
   const shouldUpdate = _date && moment().isSame(moment(_date), 'd');
-  console.debug(shouldUpdate);
 
   const dispatch = useDispatch();
   const {notebooks} = useSelector((state) => state.notebook);
   const {helperText} = useSelector((state) => state.settings);
 
   const saveAndExit = () => {
-    const notebookId = moment().format('YYYY');
-    if (shouldUpdate === true) {
-      // Updating here
-      const newNote = {
-        mood,
-        note,
-        date: _date,
-        id: _id,
-      };
-      dispatch(updateNote({newNote, notebookId}));
-    } else {
-      // Adding note here
-      const newNote = {
-        mood,
-        note,
-        date: moment().format(),
-        id:
-          notebooks[notebookId].length !== undefined
-            ? notebooks[notebookId].length
-            : 0,
-      };
-      dispatch(addNote({newNote, notebookId}));
+    if (mood?.length > 0 || (note?.length > 0 && note !== helpText)) {
+      const notebookId = moment().format('YYYY');
+      if (shouldUpdate === true) {
+        // Updating here
+        const newNote = {
+          mood,
+          note,
+          date: _date,
+          id: _id,
+        };
+        dispatch(updateNote({newNote, notebookId}));
+      } else {
+        // Adding note here
+        const newNote = {
+          mood,
+          note,
+          date: moment().format(),
+          id:
+            notebooks[notebookId].length !== undefined
+              ? notebooks[notebookId].length
+              : 0,
+        };
+        dispatch(addNote({newNote, notebookId}));
+      }
     }
     navigation.navigate('Home');
   };

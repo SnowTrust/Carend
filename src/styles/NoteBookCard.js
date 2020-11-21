@@ -6,7 +6,7 @@ const NoteBookCardStyle = (active) => {
   const {colors} = useTheme();
   return StyleSheet.create({
     container: {
-      height: 150,
+      flex: 1,
       width: 100,
       padding: 10,
       marginRight: 10,
