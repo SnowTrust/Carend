@@ -1,103 +1,149 @@
-import React, { useState } from 'react';
-import { Text, View, Switch, Linking, Pressable, Image, TextInput, ScrollView } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
-import { useTheme } from '@react-navigation/native';
-import { Icon } from 'react-native-eva-icons';
-import SettingStyle from "../styles/Settings";
+import React from 'react';
+import {
+  Text,
+  View,
+  Switch,
+  Linking,
+  Pressable,
+  Image,
+  TextInput,
+  ScrollView,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  setLanguage,
+  setUsername,
+  setHelperText,
+  setDarkTheme,
+} from '../store/slices/settings';
+import {Icon} from 'react-native-eva-icons';
+import SettingStyle from '../styles/Settings';
 
 const Settings = () => {
   const navigation = useNavigation();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const style = SettingStyle();
-  const [darkMode, setDarkMode] = useState(false);
-  const [helper, setHelper] = useState(false);
-  const [username, setUsername] = useState('Hermann');
 
+  const dispatch = useDispatch();
+  const {darkTheme, helperText, language, username} = useSelector(
+    (state) => state.settings,
+  );
   return (
     <View style={style.container}>
       <View style={style.headerContainer}>
         <Icon
-          name='arrow-ios-back'
+          name="arrow-ios-back"
           width={40}
           height={40}
           fill={colors.notification}
           style={style.headerIcon}
-          onPress={() => navigation.navigate('Home')} />
+          onPress={() => navigation.navigate('Home')}
+        />
         <Text style={style.headerText}>Settings</Text>
       </View>
       <View style={style.usernameContainer}>
         <TextInput
           style={style.username}
-          onChangeText={value => setUsername(value)}
+          onChangeText={(value) => dispatch(setUsername(value))}
           value={username}
           underlineColorAndroid="transparent"
         />
         <Icon
-          name='edit-2-outline'
+          name="edit-2-outline"
           width={15}
           height={15}
           fill={colors.notification}
-          style={style.usernameIcon} />
+          style={style.usernameIcon}
+        />
       </View>
-      <Pressable style={style.menuItemContainer} onPress={() => setDarkMode(previousState => !previousState)}>
+      <Pressable
+        style={style.menuItemContainer}
+        onPress={() => dispatch(setDarkTheme())}>
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Dark mode</Text>
-          <Text style={style.menuTextHint}>Activates or desactivates the dark mode text in the App. Requires reloading the app.</Text>
+          <Text style={style.menuTextHint}>
+            Activates or desactivates the dark mode text in the App. Requires
+            reloading the app.
+          </Text>
         </View>
         <Switch
-          trackColor={{ false: colors.primary, true: colors.border }}
-          thumbColor={darkMode ? colors.primary : colors.border}
+          trackColor={{false: colors.primary, true: colors.border}}
+          thumbColor={darkTheme ? colors.primary : colors.border}
           ios_backgroundColor={colors.primary}
-          onValueChange={() => setDarkMode(previousState => !previousState)}
-          value={darkMode}
+          onValueChange={() => dispatch(setDarkTheme())}
+          value={darkTheme}
         />
       </Pressable>
-      <Pressable style={style.menuItemContainer} onPress={() => setHelper(previousState => !previousState)}>
+      <Pressable
+        style={style.menuItemContainer}
+        onPress={() => dispatch(setHelperText())}>
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Helper</Text>
-          <Text style={style.menuTextHint}>Activates or desactivates the helper text in the editor.</Text>
+          <Text style={style.menuTextHint}>
+            Activates or desactivates the helper text in the editor.
+          </Text>
         </View>
         <Switch
-          trackColor={{ false: colors.primary, true: colors.border }}
-          thumbColor={helper ? colors.primary : colors.border}
+          trackColor={{false: colors.primary, true: colors.border}}
+          thumbColor={helperText ? colors.primary : colors.border}
           ios_backgroundColor={colors.primary}
-          onValueChange={() => setHelper(previousState => !previousState)}
-          value={helper}
+          onValueChange={() => dispatch(setHelperText())}
+          value={helperText}
         />
       </Pressable>
-      <Pressable style={style.menuItemContainer} onPress={() => Linking.openURL('https://www.snowtrust.fr/carend/bug-report/')}>
+      <Pressable
+        style={style.menuItemContainer}
+        onPress={() =>
+          Linking.openURL('https://www.snowtrust.fr/carend/bug-report/')
+        }>
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Report a bug</Text>
-          <Text style={style.menuTextHint}>Activates or desactivates the dark mode text in the App. Requires reloading the app.</Text>
+          <Text style={style.menuTextHint}>
+            Activates or desactivates the dark mode text in the App. Requires
+            reloading the app.
+          </Text>
         </View>
         <Icon
-          name='arrow-forward-outline'
+          name="arrow-forward-outline"
           width={20}
           height={20}
           fill={colors.text}
           style={style.menuIcon}
         />
       </Pressable>
-      <Pressable style={style.menuItemContainer} onPress={() => Linking.openURL('https://www.snowtrust.fr/carend/feature-request/')}>
+      <Pressable
+        style={style.menuItemContainer}
+        onPress={() =>
+          Linking.openURL('https://www.snowtrust.fr/carend/feature-request/')
+        }>
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Request a feature</Text>
-          <Text style={style.menuTextHint}>Activates or desactivates the dark mode text in the App. Requires reloading the app.</Text>
+          <Text style={style.menuTextHint}>
+            Activates or desactivates the dark mode text in the App. Requires
+            reloading the app.
+          </Text>
         </View>
         <Icon
-          name='arrow-forward-outline'
+          name="arrow-forward-outline"
           width={20}
           height={20}
           fill={colors.text}
           style={style.menuIcon}
         />
       </Pressable>
-      <Pressable style={style.menuItemContainer} onPress={() => Linking.openURL('https://www.snowtrust.fr/carend/legal/')}>
+      <Pressable
+        style={style.menuItemContainer}
+        onPress={() =>
+          Linking.openURL('https://www.snowtrust.fr/carend/legal/')
+        }>
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Legal Notice</Text>
           <Text style={style.menuTextHint}>Some Legal things.</Text>
         </View>
         <Icon
-          name='arrow-forward-outline'
+          name="arrow-forward-outline"
           width={20}
           height={20}
           fill={colors.text}
@@ -110,13 +156,13 @@ const Settings = () => {
           resizeMethod="auto"
           style={style.logo}
           source={{
-            uri: 'https://dummyimage.com/500x300/6e6e6e/ffffff.png'
+            uri: 'https://dummyimage.com/500x300/6e6e6e/ffffff.png',
           }}
         />
         <Text style={style.copyrightText}>Made with &#10084; by SnowTrust</Text>
       </View>
     </View>
   );
-}
+};
 
 export default Settings;
