@@ -1,4 +1,19 @@
-import notebookReducer from './note';
-import settingsReducer from './settings';
+import notebookReducer, {addNote, updateNote, deleteNote} from './note';
+import settingsReducer, {
+  setDarkTheme,
+  setHelperText,
+  setUsername,
+  setLanguage,
+} from './settings';
 
-export {notebookReducer, settingsReducer};
+export {
+  notebookReducer,
+  settingsReducer,
+  addNote,
+  updateNote,
+  deleteNote,
+  setDarkTheme,
+  setHelperText,
+  setLanguage,
+  setUsername,
+};

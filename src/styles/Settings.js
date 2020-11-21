@@ -1,8 +1,8 @@
 import {StyleSheet} from 'react-native';
-import Poppins from '../utils/Poppins';
+import {Poppins} from '../utils';
 import {useTheme} from '@react-navigation/native';
 
-const SettingsStyle = (active) => {
+const SettingsStyle = () => {
   const {colors} = useTheme();
   return StyleSheet.create({
     container: {

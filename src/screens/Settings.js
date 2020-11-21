@@ -17,7 +17,7 @@ import {
   setUsername,
   setHelperText,
   setDarkTheme,
-} from '../store/slices/settings';
+} from '../store/slices';
 import {Icon} from 'react-native-eva-icons';
 import SettingStyle from '../styles/Settings';
 

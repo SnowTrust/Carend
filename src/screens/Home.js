@@ -5,9 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '@react-navigation/native';
 import {Icon} from 'react-native-eva-icons';
 import {useDimensions} from '@react-native-community/hooks';
-import NoteBookCard from '../components/NoteBookCard';
-import EntryCard from '../components/EntryCard';
-import FloatingButton from '../components/FloatingButton';
+import {EntryCard, NoteBookCard, FloatingButton} from '../components';
 
 const Home = () => {
   const data = [

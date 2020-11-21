@@ -5,7 +5,7 @@ import FloatingButtonStyle from '../styles/FloatingButton';
 import {useNavigation} from '@react-navigation/native';
 import {View} from 'react-native';
 
-const EntryCard = () => {
+const FloatingButton = () => {
   const style = FloatingButtonStyle();
   const {colors} = useTheme();
   const navigation = useNavigation();
@@ -22,4 +22,4 @@ const EntryCard = () => {
   );
 };
 
-export default EntryCard;
+export default FloatingButton;

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import Poppins from '../utils/Poppins';
+import {Poppins} from '../utils';
 
 const WriteStyle = () => {
   const {colors} = useTheme();

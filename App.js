@@ -7,7 +7,7 @@
  */
 import React from 'react';
 import { SafeAreaView} from 'react-native';
-import Navigation from './src/utils/Navigation';
+import {Navigation} from './src/utils';
 import { Provider } from 'react-redux';
 import store from './src/store';
 

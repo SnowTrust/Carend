@@ -1,6 +1,6 @@
 import {StyleSheet, Dimensions, StatusBar} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {NAVIGATION_BAR} from '../utils/constants';
+import {NAVIGATION_BAR} from '../utils';
 
 const FloattingButtonStyle = () => {
   const {colors} = useTheme();

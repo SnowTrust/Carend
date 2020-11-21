@@ -5,12 +5,11 @@ import {useTheme} from '@react-navigation/native';
 import {Icon} from 'react-native-eva-icons';
 import moment from 'moment';
 import {useSelector, useDispatch} from 'react-redux';
-import {addNote, updateNote} from '../store/slices/note';
+import {addNote, updateNote} from '../store/slices';
 import WriteStyle from '../styles/Write';
 import Emoji from 'react-native-emoji';
-import WritingBox from '../components/WritingBox';
-import MoodList from '../utils/MoodList';
-import helpText from "../utils/HelperText";
+import {WritingBox} from '../components';
+import {MoodList, helperText as helpText} from '../utils';
 
 const Write = (props) => {
   const {_mood, _note, _id, _date} = props?.route?.params || {};
