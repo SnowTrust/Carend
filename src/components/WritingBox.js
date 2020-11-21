@@ -24,6 +24,7 @@ class WritingBox extends React.Component {
       colors,
       freestyle,
       setNote,
+      disabled,
     } = this.props;
     const initHTML = freestyle === true ? '' : HelperText;
     const insertCheckBox = () => {
@@ -73,10 +74,11 @@ class WritingBox extends React.Component {
                 placeholder={'How do you feel Today ?'}
                 initialContentHTML={initHTML}
                 editorInitializedCallback={() =>
-                  this.setState({isToolbarActivated: true})
+                  this.setState({isToolbarActivated: !disabled})
                 }
                 containerStyle={containerStyle}
                 editorStyle={editorStyle}
+                disabled={disabled}
               />
             </View>
           </ScrollView>

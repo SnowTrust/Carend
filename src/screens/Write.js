@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '@react-navigation/native';
@@ -12,17 +12,47 @@ import WritingBox from '../components/WritingBox';
 import MoodList from '../utils/MoodList';
 
 const Write = (props) => {
-  const [mood, setMood] = useState('');
-  const [note, setNote] = useState('');
+  const {_mood, _note, _id, _date} = props?.route?.params || {};
+
+  const [mood, setMood] = useState('' || _mood);
+  const [note, setNote] = useState('' || _note);
+  const [editorDisabled, setEditor] = useState(false);
+
   const navigation = useNavigation();
   const {colors} = useTheme();
-  // const { mood, text, isBold, isItalic, isLTR, isRTL } = props.route.params || null;
   const style = WriteStyle();
 
+  const shouldUpdate = moment().isSame(moment(_date), 'd');
+
   const dispatch = useDispatch();
-  const {darkTheme, helperText, language, username} = useSelector(
-    (state) => state.settings,
-  );
+  const {notebooks} = useSelector((state) => state.notebook);
+  const {helperText} = useSelector((state) => state.settings);
+
+  const save = () => {
+    const notebookId = moment().format('YYYY');
+    const newNote = {
+      mood,
+      note,
+      date: _date ? _date : moment().format(),
+      id:
+        shouldUpdate === true
+          ? _id
+          : notebooks[notebookId]?.length !== undefined
+          ? notebooks[notebookId]?.length
+          : 0,
+    };
+    if (shouldUpdate === true) {
+      dispatch(addNote({newNote, notebookId}));
+    } else {
+      dispatch(updateNote({newNote, notebookId}));
+    }
+  };
+
+  useEffect(() => {
+    if (shouldUpdate === false) {
+      setEditor(true);
+    }
+  }, [shouldUpdate]);
 
   return (
     <View style={style.container}>
@@ -32,7 +62,10 @@ const Write = (props) => {
         height={40}
         fill={colors.notification}
         style={style.headerIcon}
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => {
+          save();
+          navigation.navigate('Home');
+        }}
       />
       <Text style={style.headerDayContainer}>{moment().format('dddd')}</Text>
       <Text style={style.headerDateContainer}>{moment().format('MMMM D')}</Text>
@@ -47,7 +80,8 @@ const Write = (props) => {
             viewStyle={style.viewStyle}
             colors={colors}
             setNote={setNote}
-            freestyle={false}
+            freestyle={!helperText}
+            disabled={editorDisabled}
           />
         </View>
         <View style={style.moodContainer}>

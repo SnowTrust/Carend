@@ -4,17 +4,17 @@ export const _addNote = (state, action) => {
 };
 
 export const _updateNote = (state, action) => {
-  const {note, notebookId} = action.payload;
+  const {newNote, notebookId} = action.payload;
   let toUpdate = state.notebooks[notebookId].find(
-    (element) => element.id == note.id,
+    (element) => element.id === newNote.id,
   );
-  toUpdate.content = note.content;
+  toUpdate.content = newNote.content;
 };
 
 export const _deleteNote = (state, action) => {
   const {noteId, notebookId} = action.payload;
   const noteIndex = state.notebooks[notebookId].findIndex(
-    (element) => element.id == noteId,
+    (element) => element.id === noteId,
   );
   state.notebooks[notebookId].splice(noteIndex, 1);
 };
