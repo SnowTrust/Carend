@@ -8,7 +8,7 @@ export const _updateNote = (state, action) => {
   let toUpdate = state.notebooks[notebookId].find(
     (element) => element.id === newNote.id,
   );
-  toUpdate.content = newNote.content;
+  toUpdate.note = newNote.note;
 };
 
 export const _deleteNote = (state, action) => {

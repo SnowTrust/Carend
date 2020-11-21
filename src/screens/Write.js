@@ -22,30 +22,38 @@ const Write = (props) => {
   const {colors} = useTheme();
   const style = WriteStyle();
 
-  const shouldUpdate = moment().isSame(moment(_date), 'd');
+  const shouldUpdate = _date && moment().isSame(moment(_date), 'd');
+  console.debug(shouldUpdate);
 
   const dispatch = useDispatch();
   const {notebooks} = useSelector((state) => state.notebook);
   const {helperText} = useSelector((state) => state.settings);
 
-  const save = () => {
+  const saveAndExit = () => {
     const notebookId = moment().format('YYYY');
-    const newNote = {
-      mood,
-      note,
-      date: _date ? _date : moment().format(),
-      id:
-        shouldUpdate === true
-          ? _id
-          : notebooks[notebookId]?.length !== undefined
-          ? notebooks[notebookId]?.length
-          : 0,
-    };
     if (shouldUpdate === true) {
-      dispatch(addNote({newNote, notebookId}));
-    } else {
+      // Updating here
+      const newNote = {
+        mood,
+        note,
+        date: _date,
+        id: _id,
+      };
       dispatch(updateNote({newNote, notebookId}));
+    } else {
+      // Adding note here
+      const newNote = {
+        mood,
+        note,
+        date: moment().format(),
+        id:
+          notebooks[notebookId].length !== undefined
+            ? notebooks[notebookId].length
+            : 0,
+      };
+      dispatch(addNote({newNote, notebookId}));
     }
+    navigation.navigate('Home');
   };
 
   useEffect(() => {
@@ -62,10 +70,7 @@ const Write = (props) => {
         height={40}
         fill={colors.notification}
         style={style.headerIcon}
-        onPress={() => {
-          save();
-          navigation.navigate('Home');
-        }}
+        onPress={() => saveAndExit()}
       />
       <Text style={style.headerDayContainer}>{moment().format('dddd')}</Text>
       <Text style={style.headerDateContainer}>{moment().format('MMMM D')}</Text>
