@@ -87,6 +87,9 @@ const HomeStyle = () => {
       justifyContent: 'center',
       alignItems: 'center',
     },
+    EmptyEntriesText: {
+      color: colors.text,
+    },
   });
 };
 

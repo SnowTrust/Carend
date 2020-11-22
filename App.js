@@ -7,15 +7,19 @@
  */
 import React from 'react';
 import {SafeAreaView} from 'react-native';
-import {Navigation} from './src/utils';
 import {Provider} from 'react-redux';
-import store from './src/store';
+import {PersistGate} from 'redux-persist/integration/react';
+import {store, persistor} from './src/store';
+import {Navigation} from './src/utils';
+import {Loading} from './src/screens';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Provider store={store}>
-        <Navigation />
+        <PersistGate loading={<Loading />} persistor={persistor}>
+          <Navigation />
+        </PersistGate>
       </Provider>
     </SafeAreaView>
   );

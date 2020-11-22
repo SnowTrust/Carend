@@ -68,6 +68,7 @@ const SettingsStyle = () => {
       textAlign: 'center',
       fontFamily: Poppins.SemiBoldItalic,
       fontSize: 18,
+      color: colors.text,
     },
     usernameContainer: {
       flexDirection: 'row',
