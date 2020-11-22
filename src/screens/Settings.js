@@ -64,8 +64,7 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Dark mode</Text>
           <Text style={style.menuTextHint}>
-            Activates or desactivates the dark mode text in the App. Requires
-            reloading the app.
+            Activates or desactivates the dark theme in the App.
           </Text>
         </View>
         <Switch

@@ -28,11 +28,13 @@ const WriteStyle = () => {
       marginLeft: 10,
       fontFamily: Poppins.Bold,
       fontSize: 20,
+      color: colors.text,
     },
     headerDateContainer: {
       marginLeft: 10,
       fontFamily: Poppins.Light,
       fontSize: 20,
+      color: colors.text,
     },
     headerIcon: {
       padding: 10,
@@ -71,6 +73,7 @@ const WriteStyle = () => {
     editorStyle: {
       backgroundColor: colors.card,
       marginVertical: 15,
+      color: colors.text,
     },
     toolbarStyle: {
       backgroundColor: colors.backgroundColor,

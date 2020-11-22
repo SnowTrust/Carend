@@ -22,6 +22,7 @@ const SettingsStyle = () => {
       fontSize: 25,
       flex: 4,
       textAlign: 'center',
+      color: colors.text,
     },
     menuItemContainer: {
       flexDirection: 'row',
@@ -39,6 +40,7 @@ const SettingsStyle = () => {
     menuTextHeader: {
       fontFamily: Poppins.SemiBold,
       height: 'auto',
+      color: colors.text,
     },
     menuTextHint: {
       fontFamily: Poppins.Light,
@@ -54,6 +56,7 @@ const SettingsStyle = () => {
       textAlign: 'center',
       fontFamily: Poppins.Light,
       fontSize: 8,
+      color: colors.text,
     },
     logo: {
       flex: 1,

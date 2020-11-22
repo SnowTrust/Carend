@@ -6,6 +6,7 @@ import {useTheme} from '@react-navigation/native';
 import {Icon} from 'react-native-eva-icons';
 import {useDimensions} from '@react-native-community/hooks';
 import {EntryCard, NoteBookCard, FloatingButton} from '../components';
+import {useSelector, useDispatch} from 'react-redux';
 
 const Home = () => {
   const data = [
@@ -27,7 +28,9 @@ const Home = () => {
   const style = HomeStyle();
   const {colors} = useTheme();
   const {width} = useDimensions().window;
-  const colNumber = ~~(width / 310);
+  const colNumber = ~~(width / 310); // need this to be int
+  const {notebooks} = useSelector((state) => state.notebook);
+  const {username} = useSelector((state) => state.settings);
   return (
     <>
       <FloatingButton />
@@ -36,7 +39,10 @@ const Home = () => {
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}>
         <View style={style.headerContainer}>
-          <Text style={style.headerText}>Good Morning, {'\n'}Hermann</Text>
+          <Text style={style.headerText}>
+            Good Morning, {'\n'}
+            {username}
+          </Text>
           <Icon
             name="menu-2"
             width={40}

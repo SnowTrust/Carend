@@ -19,6 +19,7 @@ const HomeStyle = () => {
       fontFamily: Poppins.Bold,
       fontSize: 25,
       flex: 4,
+      color: colors.text,
     },
     headerIcon: {
       color: colors.notification,
@@ -38,6 +39,7 @@ const HomeStyle = () => {
       flex: 1,
       fontFamily: Poppins.SemiBold,
       fontSize: 18,
+      color: colors.text,
     },
     notebookHeaderIcon: {
       flex: 1,
@@ -65,6 +67,7 @@ const HomeStyle = () => {
       fontFamily: Poppins.SemiBold,
       fontSize: 18,
       marginLeft: 10,
+      color: colors.text,
     },
     entriesListViewContainer: {
       flex: 9,
