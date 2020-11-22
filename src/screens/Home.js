@@ -6,7 +6,8 @@ import {useTheme} from '@react-navigation/native';
 import {Icon} from 'react-native-eva-icons';
 import {useDimensions} from '@react-native-community/hooks';
 import {EntryCard, NoteBookCard, FloatingButton} from '../components';
-import {useSelector, useDispatch} from 'react-redux';
+import {formatNotebooks} from '../utils';
+import {useSelector} from 'react-redux';
 
 const Home = () => {
   const data = [
@@ -31,6 +32,7 @@ const Home = () => {
   const colNumber = ~~(width / 310); // need this to be int
   const {notebooks} = useSelector((state) => state.notebook);
   const {username} = useSelector((state) => state.settings);
+  const notebookData = formatNotebooks(notebooks);
   return (
     <>
       <FloatingButton />
@@ -68,7 +70,7 @@ const Home = () => {
           <View style={style.notebookListViewContainer}>
             <FlatList
               horizontal
-              data={data}
+              data={notebookData.reverse()}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => {
                 return <NoteBookCard entries={item.entries} year={item.year} />;

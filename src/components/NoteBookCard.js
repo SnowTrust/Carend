@@ -5,7 +5,7 @@ import NoteBookCardStyle from '../styles/NoteBookCard';
 
 const NoteBookCard = (props) => {
   const {year, entries} = props;
-  const active = year === moment().year();
+  const active = year === moment().format('YYYY');
   const style = NoteBookCardStyle(active);
   return (
     <View style={style.container}>

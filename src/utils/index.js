@@ -12,6 +12,7 @@ import Navigation from './Navigation';
 import Poppins from './Poppins';
 import {DarkTheme, LightTheme} from './Themes';
 import {Typography} from './Typography';
+import {formatNotebooks} from './functions';
 
 export {
   DEVICE_HEIGHT,
@@ -27,4 +28,5 @@ export {
   DarkTheme,
   LightTheme,
   Typography,
+  formatNotebooks,
 };
