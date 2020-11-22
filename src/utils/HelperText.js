@@ -1,4 +1,4 @@
-export default HelperText = `
+const HelperText = `
 <b>Daily intention or focus</b>
 <p>...</p>
 <b>Habits and To-Do's</b>
@@ -16,4 +16,6 @@ export default HelperText = `
 <p>...</p>
 <b>What are you feeling gratefull for?</b>
 <p>...</p>
-`
+`;
+
+export default HelperText;

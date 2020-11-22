@@ -5,29 +5,20 @@
  * @format
  * @flow strict-local
  */
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import React from 'react';
-import { SafeAreaView, StatusBar } from 'react-native';
-import { NavigationContainer, useTheme } from '@react-navigation/native';
-import { LightTheme, DarkTheme } from './src/utils/Themes';
-import Navigation from './src/utils/Navigation';
+import {SafeAreaView} from 'react-native';
+import {Navigation} from './src/utils';
+import {Provider} from 'react-redux';
+import store from './src/store';
 
 const App = () => {
-  const scheme = useColorScheme();
-  const { colors } = useTheme();
   return (
-    <AppearanceProvider>
-      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : LightTheme}>
-        <StatusBar 
-          barStyle={scheme === 'dark' ? "light-content" : "dark-content"} 
-          backgroundColor={colors.background}
-          />
-        <SafeAreaView style={{flex:1}}>
-          <Navigation />
-        </SafeAreaView>
-      </NavigationContainer>
-    </AppearanceProvider>
-  )
-}
+    <SafeAreaView style={{flex: 1}}>
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    </SafeAreaView>
+  );
+};
 
 export default App;
