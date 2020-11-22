@@ -9,7 +9,9 @@ const EmptyEntries = () => {
   const styles = HomeStyle();
   return (
     <View style={styles.EmptyEntries}>
-      <Text>You have no entries yet, start by writting a note</Text>
+      <Text style={styles.EmptyEntriesText}>
+        You have no entries yet, start by writting a note
+      </Text>
       <View style={styles.EmptyEntriesIcon}>
         <Icon
           name="edit-2-outline"
