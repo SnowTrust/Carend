@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const formatNotebooks = (notebooks) => {
   const returnData = [];
   let keys = Object.keys(notebooks);
@@ -10,4 +12,19 @@ export const formatNotebooks = (notebooks) => {
   return returnData;
 };
 
-export const parseEntries = () => {};
+export const formatEntryForCard = (item) => {
+  return {
+    date: moment(item.date).format('dddd D'),
+    hour: moment(item.date).format('h:mm a'),
+  };
+};
+
+export const findEntry = (notebook, date) => {
+  const year = moment(date).format('YYYY');
+  const found = notebook[year].find(
+    (entry) =>
+      moment(entry.date).format('D-MM-YYYY') ===
+      moment(date).format('D-MM-YYYY'),
+  );
+  return found;
+};

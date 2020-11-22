@@ -4,9 +4,11 @@ import {Text, View} from 'react-native';
 import {Icon} from 'react-native-eva-icons';
 import EntryCardStyle from '../styles/EntryCard';
 import {useNavigation} from '@react-navigation/native';
+import {formatEntryForCard} from '../utils';
 
 const EntryCard = (props) => {
-  const {date, hour} = props;
+  const {data} = props;
+  const {hour, date} = formatEntryForCard(data);
   const style = EntryCardStyle();
   const {colors} = useTheme();
   const navigation = useNavigation();
@@ -22,7 +24,14 @@ const EntryCard = (props) => {
         height={30}
         fill={colors.notification}
         style={style.icon}
-        onPress={() => navigation.navigate('Write')}
+        onPress={() =>
+          navigation.navigate('Write', {
+            _mood: data.mood,
+            _note: data.note,
+            _id: data.id,
+            _date: data.date,
+          })
+        }
       />
     </View>
   );

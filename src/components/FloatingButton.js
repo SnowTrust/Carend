@@ -4,11 +4,16 @@ import {Icon} from 'react-native-eva-icons';
 import FloatingButtonStyle from '../styles/FloatingButton';
 import {useNavigation} from '@react-navigation/native';
 import {View} from 'react-native';
+import moment from 'moment';
+import {useSelector} from 'react-redux';
+import {findEntry} from '../utils';
 
 const FloatingButton = () => {
   const style = FloatingButtonStyle();
   const {colors} = useTheme();
   const navigation = useNavigation();
+  const {notebooks} = useSelector((state) => state.notebook);
+  const entry = findEntry(notebooks, moment());
   return (
     <View style={style.container}>
       <Icon
@@ -16,7 +21,14 @@ const FloatingButton = () => {
         width={25}
         height={25}
         fill={colors.background}
-        onPress={() => navigation.navigate('Write')}
+        onPress={() =>
+          navigation.navigate('Write', {
+            _mood: entry?.mood || '',
+            _note: entry?.note || '',
+            _id: entry?.id,
+            _date: entry?.date,
+          })
+        }
       />
     </View>
   );

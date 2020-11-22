@@ -12,7 +12,7 @@ import Navigation from './Navigation';
 import Poppins from './Poppins';
 import {DarkTheme, LightTheme} from './Themes';
 import {Typography} from './Typography';
-import {formatNotebooks} from './functions';
+import {formatNotebooks, formatEntryForCard, findEntry} from './functions';
 
 export {
   DEVICE_HEIGHT,
@@ -29,4 +29,6 @@ export {
   LightTheme,
   Typography,
   formatNotebooks,
+  formatEntryForCard,
+  findEntry,
 };

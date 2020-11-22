@@ -25,8 +25,9 @@ class WritingBox extends React.Component {
       freestyle,
       setNote,
       disabled,
+      note,
     } = this.props;
-    const initHTML = freestyle === true ? '' : HelperText;
+    const initHTML = note ? note : freestyle === true ? '' : HelperText;
     const insertCheckBox = () => {
       this.richText?.current?.insertHTML('<input type="checkbox" />...<br>');
     };

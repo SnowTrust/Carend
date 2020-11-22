@@ -74,6 +74,19 @@ const HomeStyle = () => {
       paddingLeft: 15,
       alignItems: 'center',
     },
+    emptyEntries: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 10,
+      color: colors.notification,
+    },
+    EmptyEntriesIcon: {
+      flex: 1,
+      opacity: 0.5,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   });
 };
 

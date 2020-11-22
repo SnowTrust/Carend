@@ -14,15 +14,16 @@ import {MoodList, helperText as helpText} from '../utils';
 const Write = (props) => {
   const {_mood, _note, _id, _date} = props?.route?.params || {};
 
-  const [mood, setMood] = useState('' || _mood);
-  const [note, setNote] = useState('' || _note);
+  const [mood, setMood] = useState(_mood);
+  const [note, setNote] = useState(_note);
   const [editorDisabled, setEditor] = useState(false);
 
   const navigation = useNavigation();
   const {colors} = useTheme();
   const style = WriteStyle();
 
-  const shouldUpdate = _date && moment().isSame(moment(_date), 'd');
+  const today = moment().startOf('day');
+  const shouldUpdateByDate = moment(today).isSame(moment(_date), 'd');
 
   const dispatch = useDispatch();
   const {notebooks} = useSelector((state) => state.notebook);
@@ -31,7 +32,7 @@ const Write = (props) => {
   const saveAndExit = () => {
     if (mood?.length > 0 || (note?.length > 0 && note !== helpText)) {
       const notebookId = moment().format('YYYY');
-      if (shouldUpdate === true) {
+      if (shouldUpdateByDate === true && _id !== undefined && _id !== null) {
         // Updating here
         const newNote = {
           mood,
@@ -58,10 +59,10 @@ const Write = (props) => {
   };
 
   useEffect(() => {
-    if (shouldUpdate === false) {
+    if (shouldUpdateByDate === false) {
       setEditor(true);
     }
-  }, [shouldUpdate]);
+  }, [shouldUpdateByDate]);
 
   return (
     <View style={style.container}>
@@ -73,8 +74,12 @@ const Write = (props) => {
         style={style.headerIcon}
         onPress={() => saveAndExit()}
       />
-      <Text style={style.headerDayContainer}>{moment().format('dddd')}</Text>
-      <Text style={style.headerDateContainer}>{moment().format('MMMM D')}</Text>
+      <Text style={style.headerDayContainer}>
+        {moment(_date).format('dddd')}
+      </Text>
+      <Text style={style.headerDateContainer}>
+        {moment(_date).format('MMMM D')}
+      </Text>
       <View style={style.textStylingContainer} />
       <View style={style.writingBoxContainer}>
         <View style={style.writingBox}>
@@ -86,6 +91,7 @@ const Write = (props) => {
             viewStyle={style.viewStyle}
             colors={colors}
             setNote={setNote}
+            note={note}
             freestyle={!helperText}
             disabled={editorDisabled}
           />
@@ -99,7 +105,9 @@ const Write = (props) => {
                 key={index}
                 style={mood === moodId ? style.activeMood : style.inactiveMood}
                 onPress={() => {
-                  setMood(mood === moodId ? '' : moodId);
+                  if (shouldUpdateByDate === true) {
+                    setMood(mood === moodId ? '' : moodId);
+                  }
                 }}
               />
             );

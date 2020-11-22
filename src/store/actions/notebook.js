@@ -8,6 +8,7 @@ export const _updateNote = (state, action) => {
   let toUpdate = state.notebooks[notebookId].find(
     (element) => element.id === newNote.id,
   );
+  toUpdate.mood = newNote.mood;
   toUpdate.note = newNote.note;
 };
 

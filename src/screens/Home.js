@@ -5,26 +5,17 @@ import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '@react-navigation/native';
 import {Icon} from 'react-native-eva-icons';
 import {useDimensions} from '@react-native-community/hooks';
-import {EntryCard, NoteBookCard, FloatingButton} from '../components';
-import {formatNotebooks} from '../utils';
 import {useSelector} from 'react-redux';
+import moment from 'moment';
+import {formatNotebooks} from '../utils';
+import {
+  EntryCard,
+  NoteBookCard,
+  FloatingButton,
+  EmptyEntries,
+} from '../components';
 
 const Home = () => {
-  const data = [
-    {year: 2020, entries: 100},
-    {year: 2019, entries: 10},
-    {year: 2018, entries: 200},
-    {year: 2017, entries: 200},
-    {year: 2016, entries: 200},
-  ];
-  const dataEntries = [
-    {id: 1, date: 'September 9', hour: '11:00 am'},
-    {id: 3, date: 'September 9', hour: '11:00 am'},
-    {id: 4, date: 'September 9', hour: '11:00 am'},
-    {id: 5, date: 'September 9', hour: '11:00 am'},
-    {id: 6, date: 'September 9', hour: '11:00 am'},
-    {id: 7, date: 'September 9', hour: '11:00 am'},
-  ];
   const navigation = useNavigation();
   const style = HomeStyle();
   const {colors} = useTheme();
@@ -84,12 +75,13 @@ const Home = () => {
           <Text style={style.entriesHeaderText}>Recent Entries</Text>
           <View style={style.entriesListViewContainer}>
             <FlatList
-              data={dataEntries}
+              data={notebooks[moment().format('YYYY')]}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => {
-                return <EntryCard hour={item.hour} date={item.date} />;
+                return <EntryCard data={item} />;
               }}
               keyExtractor={(item) => String(item.id)}
+              ListEmptyComponent={EmptyEntries}
               numColumns={colNumber}
             />
           </View>
