@@ -13,7 +13,7 @@ import EntryCard from '../components/EntryCard';
 import NoteBookCard from '../components/NoteBookCard';
 import FloatingButton from '../components/FloatingButton';
 import {setUsername} from '../store/slices';
-import {loadCredentials} from '../utils';
+import {loadCredentials, getGreetingTime } from '../utils';
 import Loading from './Loading';
 
 const Home = () => {
@@ -27,6 +27,7 @@ const Home = () => {
   const {notebooks} = useSelector((state) => state.notebook);
   const {username} = useSelector((state) => state.settings);
   const notebookData = formatNotebooks(notebooks);
+  const greetings = getGreetingTime(moment());
 
   useEffect(() => {
     async function anyNameFunction() {
@@ -54,7 +55,7 @@ const Home = () => {
         showsVerticalScrollIndicator={false}>
         <View style={style.headerContainer}>
           <Text style={style.headerText}>
-            Good Morning, {'\n'}
+            Good {greetings}, {'\n'}
             {username}
           </Text>
           <Icon

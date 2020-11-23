@@ -17,6 +17,7 @@ import {
   findEntry,
   saveCredentials,
   loadCredentials,
+  getGreetingTime,
 } from './functions';
 import welcomeScreenData from './welcomeScreenData';
 
@@ -38,5 +39,6 @@ export {
   findEntry,
   welcomeScreenData,
   saveCredentials,
+  getGreetingTime,
   loadCredentials,
 };
