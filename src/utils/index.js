@@ -8,11 +8,11 @@ import {
 } from './constants';
 import helperText from './HelperText';
 import MoodList from './MoodList';
-import Navigation from './Navigation';
 import Poppins from './Poppins';
 import {DarkTheme, LightTheme} from './Themes';
 import {Typography} from './Typography';
 import {formatNotebooks, formatEntryForCard, findEntry} from './functions';
+import welcomeScreenData from './welcomeScreenData';
 
 export {
   DEVICE_HEIGHT,
@@ -23,7 +23,6 @@ export {
   NAVIGATION_BAR,
   helperText,
   MoodList,
-  Navigation,
   Poppins,
   DarkTheme,
   LightTheme,
@@ -31,4 +30,5 @@ export {
   formatNotebooks,
   formatEntryForCard,
   findEntry,
+  welcomeScreenData,
 };

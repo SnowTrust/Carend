@@ -7,13 +7,11 @@ import {Icon} from 'react-native-eva-icons';
 import {useDimensions} from '@react-native-community/hooks';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
-import {formatNotebooks} from '../utils';
-import {
-  EntryCard,
-  NoteBookCard,
-  FloatingButton,
-  EmptyEntries,
-} from '../components';
+import {formatNotebooks} from '../utils/functions';
+import EmptyEntries from '../components/EmptyEntries';
+import EntryCard from '../components/EntryCard';
+import NoteBookCard from '../components/NoteBookCard';
+import FloatingButton from '../components/FloatingButton';
 
 const Home = () => {
   const navigation = useNavigation();

@@ -25,6 +25,7 @@ const compressor = createCompressor({
 const persistConfig = {
   key: 'root',
   storage: FilesystemStorage,
+  transforms: [compressor],
 };
 
 const rootReducer = combineReducers({
@@ -43,6 +44,6 @@ const store = configureStore({
   }),
 });
 
-let persistor = persistStore(store, {transforms: [compressor]});
+let persistor = persistStore(store);
 
 export {store, persistor};
