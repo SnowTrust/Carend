@@ -4,13 +4,21 @@ import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
-import {LightTheme, DarkTheme} from './Themes';
-import {Home, Write, Settings, Welcome} from '../screens';
+import {LightTheme, DarkTheme} from './utils/Themes';
+import Home from './screens/Home';
+import Write from './screens/Write';
+import Settings from './screens/Settings';
+import Welcome from './screens/Welcome';
 
 const Stack = createStackNavigator();
 
 const Navigation = () => {
   const {darkTheme} = useSelector((state) => state.settings);
+  const [firstTimeUser, setFirstTimeUser] = React.useState(true);
+
+  if (firstTimeUser === true) {
+    return <Welcome />;
+  }
 
   return (
     <AppearanceProvider>
@@ -24,10 +32,11 @@ const Navigation = () => {
               : LightTheme.colors.background
           }
         />
-        <Stack.Navigator initialRouteName="Home" headerMode="none">
+        <Stack.Navigator
+          initialRouteName={firstTimeUser === true ? 'Wecome' : 'Home'}
+          headerMode="none">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Write" component={Write} />
-          <Stack.Screen name="Welcome" component={Welcome} />
           <Stack.Screen name="Settings" component={Settings} />
         </Stack.Navigator>
       </NavigationContainer>

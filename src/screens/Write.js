@@ -8,7 +8,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addNote, updateNote} from '../store/slices';
 import WriteStyle from '../styles/Write';
 import Emoji from 'react-native-emoji';
-import {WritingBox} from '../components';
+import WritingBox from '../components/WritingBox';
 import {MoodList, helperText as helpText} from '../utils';
 
 const Write = (props) => {

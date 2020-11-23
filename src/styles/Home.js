@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Poppins} from '../utils';
+import Poppins from '../utils/Poppins';
 import {useTheme} from '@react-navigation/native';
 
 const HomeStyle = () => {
