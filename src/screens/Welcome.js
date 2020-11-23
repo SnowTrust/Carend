@@ -24,13 +24,9 @@ export default class Welcome extends React.Component {
   _renderItem = ({item}) => {
     const {options} = item;
     return (
-      <View
-        style={[
-          styles.slide,
-          {
-            backgroundColor: item.bg,
-          },
-        ]}>
+      <ImageBackground
+        style={[styles.slide, styles.backgroundImage]}
+        source={item.bg}>
         {options?.image && (
           <Image
             source={options.source}
@@ -53,7 +49,7 @@ export default class Welcome extends React.Component {
             <Text style={styles.buttonText}>{options.buttonText}</Text>
           </TouchableOpacity>
         )}
-      </View>
+      </ImageBackground>
     );
   };
 
@@ -84,7 +80,11 @@ export default class Welcome extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <StatusBar translucent backgroundColor="transparent" />
+        <StatusBar
+          translucent
+          backgroundColor="transparent"
+          barStyle={'dark-content'}
+        />
         <AppIntroSlider
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

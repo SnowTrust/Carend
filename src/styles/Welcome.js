@@ -6,7 +6,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: 'rgba(255, 255, 255, 0.0)',
   },
   image: {
     width: 320,
@@ -14,12 +14,12 @@ export default StyleSheet.create({
     marginVertical: 32,
   },
   text: {
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(0, 0, 0, 1)',
     textAlign: 'center',
   },
   title: {
     fontSize: 22,
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     fontFamily: Poppins.SemiBold,
   },
@@ -63,5 +63,9 @@ export default StyleSheet.create({
     margin: 20,
     color: '#fff',
     fontSize: 20,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
   },
 });

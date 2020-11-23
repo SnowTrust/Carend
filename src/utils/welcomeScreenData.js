@@ -2,16 +2,16 @@ export default [
   {
     title: 'Hello, Nice to have you here',
     text: "Let's get things up and running",
-    bg: '#59b2ab',
+    bg: require('../../assets/images/1.png'),
     options: {
       image: true,
-      source: {uri: 'https://dummyimage.com/500x300/6e6e6e/ffffff.png'},
+      source: require('../../assets/images/logo-long.png'),
     },
   },
   {
     title: 'What is your beautifull name ?',
     text: '',
-    bg: '#febe29',
+    bg: require('../../assets/images/2.png'),
     options: {
       textInput: true,
       value: 'username',
@@ -23,7 +23,7 @@ export default [
     title: "Let's secure your app",
     text:
       "This key will be used to encrypt and decrypt your data.\nPlease make sure you don't forget it",
-    bg: '#22bcb5',
+    bg: require('../../assets/images/3.png'),
     options: {
       textInput: true,
       value: 'password',
@@ -34,7 +34,7 @@ export default [
   {
     title: 'Everything up and running',
     text: '',
-    bg: '#22bcb5',
+    bg: require('../../assets/images/4.png'),
     options: {
       button: true,
       buttonText: "Let's go",

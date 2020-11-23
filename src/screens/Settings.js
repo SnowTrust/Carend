@@ -154,9 +154,7 @@ const Settings = () => {
           resizeMode="contain"
           resizeMethod="auto"
           style={style.logo}
-          source={{
-            uri: 'https://dummyimage.com/500x300/6e6e6e/ffffff.png',
-          }}
+          source={require('../../assets/images/logo-long.png')}
         />
         <Text style={style.copyrightText}>Made with &#10084; by SnowTrust</Text>
       </View>
