@@ -100,8 +100,7 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Report a bug</Text>
           <Text style={style.menuTextHint}>
-            Activates or desactivates the dark mode text in the App. Requires
-            reloading the app.
+            Noticed an bug or a typo, tell us here an we'll fix it ASAP.
           </Text>
         </View>
         <Icon
@@ -120,8 +119,7 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Request a feature</Text>
           <Text style={style.menuTextHint}>
-            Activates or desactivates the dark mode text in the App. Requires
-            reloading the app.
+            Have a brilliant idea? Tell us how to bring it to life.
           </Text>
         </View>
         <Icon

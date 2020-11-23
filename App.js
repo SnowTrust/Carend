@@ -20,6 +20,7 @@ const App = () => {
     async function anyNameFunction() {
       let result = await loadCredentials();
       if (result !== null) {
+        setIsReady(true);
         setFirstTimeUser(false);
       }
     }
@@ -27,6 +28,7 @@ const App = () => {
   }, []);
 
   const [firstTimeUser, setFirstTimeUser] = useState(true);
+  const [isReady, setIsReady] = useState(false);
 
   const saveUserData = async (username, password) => {
     console.log('username-i', username, 'password-i', password);
@@ -34,7 +36,11 @@ const App = () => {
     setFirstTimeUser(false);
   };
 
-  if (firstTimeUser === true) {
+  if(isReady === false){
+    return <Loading />;
+  }
+
+  if (firstTimeUser === true && isReady === true) {
     return <Welcome saveUserData={saveUserData} />;
   }
 
