@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Poppins from '../utils/Poppins';
+import {DEVICE_WIDTH} from '../utils/constants';
 
 export default StyleSheet.create({
   slide: {
@@ -37,7 +38,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   dot: {
-    width: 10,
+    width: DEVICE_WIDTH / 4 - 80,
     height: 10,
     borderRadius: 5,
     marginHorizontal: 4,
