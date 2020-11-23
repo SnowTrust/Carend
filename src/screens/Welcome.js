@@ -54,8 +54,20 @@ export default class Welcome extends React.Component {
             resizeMethod="auto"
           />
         )}
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.text}>{item.text}</Text>
+        <Text
+          style={[
+            styles.title,
+            options.textWhite === true && {color: '#fdfdfd'},
+          ]}>
+          {item.title}
+        </Text>
+        <Text
+          style={[
+            styles.text,
+            options.textWhite === true && {color: '#fdfdfd'},
+          ]}>
+          {item.text}
+        </Text>
         {options?.textInput && (
           <TextInput
             style={styles.textInput}

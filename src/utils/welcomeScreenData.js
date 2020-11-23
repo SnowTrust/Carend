@@ -6,6 +6,7 @@ export default [
     options: {
       image: true,
       source: require('../../assets/images/logo-long.png'),
+      textWhite: true,
     },
   },
   {
