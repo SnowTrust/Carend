@@ -1,4 +1,5 @@
 import moment from 'moment';
+import * as Keychain from 'react-native-keychain';
 
 export const formatNotebooks = (notebooks) => {
   const returnData = [];
@@ -27,4 +28,21 @@ export const findEntry = (notebook, date) => {
       moment(date).format('D-MM-YYYY'),
   );
   return found;
+};
+
+export const saveCredentials = async (username, password) => {
+  return await Keychain.setGenericPassword(username, password);
+};
+
+export const loadCredentials = async () => {
+  try {
+    const credentials = await Keychain.getGenericPassword();
+    if (credentials) {
+      return credentials;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.log("Keychain couldn't be accessed!", error);
+  }
 };

@@ -14,29 +14,9 @@ import {welcomeScreenData as data} from '../utils';
 export default class Welcome extends React.Component {
   constructor(props) {
     super(props);
-    this.style = props.style;
     this.slider = React.createRef();
-    this.setUsername = props.setUsername.bind(this);
-    this.setPassword = props.setPassword.bind(this);
-    this.setFirstTimeUser = props.setFirstTimeUser.bind(this);
+    this.saveUserData = props.saveUserData.bind(this);
     this.state = {
-      username: props.username,
-      password: props.password,
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.username !== prevState.username) {
-      return {
-        username: nextProps.username,
-      };
-    }
-    if (nextProps.password !== prevState.password) {
-      return {
-        password: nextProps.password,
-      };
-    }
-    return {
       username: '',
       password: '',
     };
@@ -81,15 +61,23 @@ export default class Welcome extends React.Component {
             style={styles.textInput}
             placeholder={options.placeholder}
             placeholderTextColor={'rgba(255, 255, 255, 0.50)'}
-            onChangeText={this[options.setValue]}
+            onChangeText={(text) => {
+              if (options.value === 'username') {
+                this.setState({username: text});
+              } else {
+                this.setState({password: text});
+              }
+            }}
+            value={this.state[options.value]}
           />
         )}
         {options?.button && (
           <TouchableOpacity
             style={styles.button}
+            disabled={!(this.state.username && this.state.password)}
             onPress={() => {
-              if (this.state.username) {
-                this.setFirstTimeUser(false);
+              if (this.state.username && this.state.password) {
+                this.saveUserData(this.state.username, this.state.password);
               }
             }}>
             <Text style={styles.buttonText}>{options.buttonText}</Text>
