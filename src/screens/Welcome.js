@@ -16,10 +16,49 @@ export default class Welcome extends React.Component {
     super(props);
     this.style = props.style;
     this.slider = React.createRef();
+    this.setUsername = props.setUsername.bind(this);
+    this.setPassword = props.setPassword.bind(this);
+    this.setFirstTimeUser = props.setFirstTimeUser.bind(this);
     this.state = {
-      username: '',
+      username: props.username,
+      password: props.password,
     };
   }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.username !== prevState.username) {
+      return {
+        username: nextProps.username,
+      };
+    }
+    if (nextProps.password !== prevState.password) {
+      return {
+        password: nextProps.password,
+      };
+    }
+    return {
+      username: '',
+      password: '',
+    };
+  }
+
+  checkData = (index, lastIndex) => {
+    const {username, password} = this.state;
+    switch (index) {
+      case 2:
+        if (username === '' || username === null) {
+          this.slider?.goToSlide(lastIndex, true);
+        }
+        break;
+      case 3:
+        if (password === '' || password === null) {
+          this.slider?.goToSlide(lastIndex, true);
+        }
+        break;
+      default:
+        break;
+    }
+  };
 
   _renderItem = ({item}) => {
     const {options} = item;
@@ -42,10 +81,17 @@ export default class Welcome extends React.Component {
             style={styles.textInput}
             placeholder={options.placeholder}
             placeholderTextColor={'rgba(255, 255, 255, 0.50)'}
+            onChangeText={this[options.setValue]}
           />
         )}
         {options?.button && (
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              if (this.state.username) {
+                this.setFirstTimeUser(false);
+              }
+            }}>
             <Text style={styles.buttonText}>{options.buttonText}</Text>
           </TouchableOpacity>
         )}
@@ -91,6 +137,9 @@ export default class Welcome extends React.Component {
           renderPagination={this._renderPagination}
           data={data}
           ref={(ref) => (this.slider = ref)}
+          onSlideChange={(index, lastIndex) => {
+            this.checkData(index, lastIndex);
+          }}
         />
       </View>
     );
