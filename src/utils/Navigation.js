@@ -5,8 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {LightTheme, DarkTheme} from './Themes';
-import {Home, Write, Settings} from '../screens';
-import Welcome from '../screens/welcome/index';
+import {Home, Write, Settings, Welcome} from '../screens';
 
 const Stack = createStackNavigator();
 
