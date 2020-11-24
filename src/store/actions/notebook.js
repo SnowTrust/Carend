@@ -1,6 +1,11 @@
+import moment from 'moment';
+
 export const _addNote = (state, action) => {
   const {newNote, notebookId} = action.payload;
   state.notebooks[notebookId].push(newNote);
+  if (state.notebooks[notebookId].length > 2) {
+    state.notebooks[notebookId].sort((a, b) => moment(a.date).isBefore(b.date));
+  }
 };
 
 export const _updateNote = (state, action) => {

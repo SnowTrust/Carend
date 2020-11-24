@@ -13,7 +13,7 @@ import EntryCard from '../components/EntryCard';
 import NoteBookCard from '../components/NoteBookCard';
 import FloatingButton from '../components/FloatingButton';
 import {setUsername} from '../store/slices';
-import {loadCredentials, getGreetingTime } from '../utils';
+import {loadCredentials, getGreetingTime} from '../utils';
 import Loading from './Loading';
 
 const Home = () => {
@@ -28,6 +28,7 @@ const Home = () => {
   const {username} = useSelector((state) => state.settings);
   const notebookData = formatNotebooks(notebooks);
   const greetings = getGreetingTime(moment());
+  let entries = notebooks[moment().format('YYYY')];
 
   useEffect(() => {
     async function anyNameFunction() {
@@ -97,7 +98,7 @@ const Home = () => {
           <Text style={style.entriesHeaderText}>Recent Entries</Text>
           <View style={style.entriesListViewContainer}>
             <FlatList
-              data={notebooks[moment().format('YYYY')].reverse()}
+              data={entries}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => {
                 return <EntryCard data={item} />;

@@ -20,9 +20,9 @@ const App = () => {
     async function anyNameFunction() {
       let result = await loadCredentials();
       if (result !== null) {
-        setIsReady(true);
         setFirstTimeUser(false);
       }
+      setIsReady(true);
     }
     anyNameFunction();
   }, []);
@@ -36,7 +36,7 @@ const App = () => {
     setFirstTimeUser(false);
   };
 
-  if(isReady === false){
+  if (isReady === false) {
     return <Loading />;
   }
 

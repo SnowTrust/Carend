@@ -21,8 +21,8 @@ const FloatingButton = () => {
         navigation.navigate('Write', {
           _mood: entry?.mood || '',
           _note: entry?.note || '',
-          _id: entry?.id,
-          _date: entry?.date || moment(),
+          _id: entry?.id || null,
+          _date: entry?.date || moment().format(),
         })
       }>
       <Icon name="edit" width={25} height={25} fill={colors.background} />
