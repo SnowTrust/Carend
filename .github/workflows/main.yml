@@ -18,10 +18,10 @@ jobs:
         run: ls && chmod +x android/build.gradle && chmod +x android/gradlew
       - name: Build with Gradle
         id: build
-        run: .android/gradlew build
+        run: cd android && ./gradlew build
       - name: Build Release AAB
         id: buildRelease
-        run: .android/gradlew bundleRelease
+        run: cd android && ./gradlew bundleRelease
       - name: Sign AAB
         id: sign
         uses: r0adkll/sign-android-release@v1
