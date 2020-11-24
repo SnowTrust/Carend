@@ -27,6 +27,7 @@ const SearchStyle = () => {
     loading: {
       justifyContent: 'center',
       alignItems: 'center',
+      flex: 1,
     },
   });
 };
