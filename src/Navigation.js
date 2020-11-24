@@ -2,7 +2,7 @@ import {AppearanceProvider} from 'react-native-appearance';
 import React from 'react';
 import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {LightTheme, DarkTheme} from './utils/Themes';
 import Home from './screens/Home';
@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 
 const Navigation = () => {
   const {darkTheme} = useSelector((state) => state.settings);
-
+  const options = {...TransitionPresets.ModalSlideFromBottomIOS};
   return (
     <AppearanceProvider>
       <NavigationContainer theme={darkTheme === true ? DarkTheme : LightTheme}>
@@ -27,9 +27,13 @@ const Navigation = () => {
           }
         />
         <Stack.Navigator initialRouteName="Home" headerMode="none">
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Write" component={Write} />
-          <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="Home" component={Home} options={options} />
+          <Stack.Screen name="Write" component={Write} options={options} />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
+            options={{...TransitionPresets.ModalPresentationIOS}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </AppearanceProvider>

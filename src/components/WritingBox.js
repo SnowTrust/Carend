@@ -72,7 +72,7 @@ class WritingBox extends React.Component {
                   setNote(value).bind(this);
                 }}
                 ref={this.richText}
-                placeholder={'How do you feel Today ?'}
+                placeholder={disabled === true ? '' : 'How do you feel Today ?'}
                 initialContentHTML={initHTML}
                 editorInitializedCallback={() =>
                   this.setState({isToolbarActivated: !disabled})

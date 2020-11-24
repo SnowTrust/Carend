@@ -11,7 +11,14 @@ import MoodList from './MoodList';
 import Poppins from './Poppins';
 import {DarkTheme, LightTheme} from './Themes';
 import {Typography} from './Typography';
-import {formatNotebooks, formatEntryForCard, findEntry} from './functions';
+import {
+  formatNotebooks,
+  formatEntryForCard,
+  findEntry,
+  saveCredentials,
+  loadCredentials,
+  getGreetingTime,
+} from './functions';
 import welcomeScreenData from './welcomeScreenData';
 
 export {
@@ -31,4 +38,7 @@ export {
   formatEntryForCard,
   findEntry,
   welcomeScreenData,
+  saveCredentials,
+  getGreetingTime,
+  loadCredentials,
 };

@@ -15,7 +15,7 @@ export default StyleSheet.create({
     marginVertical: 32,
   },
   text: {
-    color: 'rgba(0, 0, 0, 1)',
+    color: '#0f1920',
     textAlign: 'center',
   },
   title: {

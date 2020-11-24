@@ -10,11 +10,9 @@ const Loading = () => {
         resizeMode="contain"
         resizeMethod="auto"
         style={styles.logo}
-        source={{
-          uri: 'https://dummyimage.com/500x300/6e6e6e/ffffff.png',
-        }}
+        source={require('../../assets/images/logo-long.png')}
       />
-      <ActivityIndicator size={'large'} />
+      <ActivityIndicator size={'large'} color="#3782ec" />
     </View>
   );
 };

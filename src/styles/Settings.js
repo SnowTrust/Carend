@@ -51,6 +51,7 @@ const SettingsStyle = () => {
     copyrightContainer: {
       flex: 1,
       justifyContent: 'flex-end',
+      alignItems: "center"
     },
     copyrightText: {
       textAlign: 'center',
@@ -59,8 +60,10 @@ const SettingsStyle = () => {
       color: colors.text,
     },
     logo: {
-      flex: 1,
+      width: 320,
+      height: 320,
       margin: 10,
+      alignContent: "center"
     },
     username: {
       justifyContent: 'center',

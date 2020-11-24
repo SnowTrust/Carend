@@ -8,8 +8,9 @@ const LoadingStyle = () => {
       alignItems: 'center',
     },
     logo: {
-      flex: 1,
       margin: 10,
+      width: 320,
+      height: 320,
     },
   });
 };

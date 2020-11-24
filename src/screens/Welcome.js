@@ -14,44 +14,18 @@ import {welcomeScreenData as data} from '../utils';
 export default class Welcome extends React.Component {
   constructor(props) {
     super(props);
-    this.style = props.style;
     this.slider = React.createRef();
-    this.setUsername = props.setUsername.bind(this);
-    this.setPassword = props.setPassword.bind(this);
-    this.setFirstTimeUser = props.setFirstTimeUser.bind(this);
+    this.saveUserData = props.saveUserData.bind(this);
     this.state = {
-      username: props.username,
-      password: props.password,
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.username !== prevState.username) {
-      return {
-        username: nextProps.username,
-      };
-    }
-    if (nextProps.password !== prevState.password) {
-      return {
-        password: nextProps.password,
-      };
-    }
-    return {
       username: '',
-      password: '',
     };
   }
 
   checkData = (index, lastIndex) => {
-    const {username, password} = this.state;
+    const {username} = this.state;
     switch (index) {
-      case 2:
-        if (username === '' || username === null) {
-          this.slider?.goToSlide(lastIndex, true);
-        }
-        break;
       case 3:
-        if (password === '' || password === null) {
+        if (username === '' || username === null) {
           this.slider?.goToSlide(lastIndex, true);
         }
         break;
@@ -74,22 +48,40 @@ export default class Welcome extends React.Component {
             resizeMethod="auto"
           />
         )}
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.text}>{item.text}</Text>
+        <Text
+          style={[
+            styles.title,
+            options?.textWhite === true && {color: '#fdfdfd'},
+          ]}>
+          {item.title}
+        </Text>
+        <Text
+          style={[
+            styles.text,
+            options?.textWhite === true && {color: '#fdfdfd'},
+          ]}>
+          {item.text}
+        </Text>
         {options?.textInput && (
           <TextInput
             style={styles.textInput}
             placeholder={options.placeholder}
             placeholderTextColor={'rgba(255, 255, 255, 0.50)'}
-            onChangeText={this[options.setValue]}
+            onChangeText={(text) => {
+              if (options.value === 'username') {
+                this.setState({username: text});
+              }
+            }}
+            value={this.state[options.value]}
           />
         )}
         {options?.button && (
           <TouchableOpacity
             style={styles.button}
+            disabled={!this.state.username}
             onPress={() => {
               if (this.state.username) {
-                this.setFirstTimeUser(false);
+                this.saveUserData(this.state.username);
               }
             }}>
             <Text style={styles.buttonText}>{options.buttonText}</Text>
