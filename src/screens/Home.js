@@ -72,14 +72,6 @@ const Home = () => {
         <View style={style.notebookContainer}>
           <View style={style.notebookHeaderContainer}>
             <Text style={style.notebookHeaderText}>Your Notebooks</Text>
-            <Icon
-              name="more-horizontal"
-              width={30}
-              height={30}
-              fill={colors.notification}
-              style={style.notebookHeaderIcon}
-              onPress={() => navigation.navigate('Settings')}
-            />
           </View>
           <View style={style.notebookListViewContainer}>
             <FlatList

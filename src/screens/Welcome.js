@@ -15,6 +15,7 @@ export default class Welcome extends React.Component {
   constructor(props) {
     super(props);
     this.slider = React.createRef();
+    this.textInput = React.createRef();
     this.saveUserData = props.saveUserData.bind(this);
     this.state = {
       username: '',
@@ -64,6 +65,14 @@ export default class Welcome extends React.Component {
         </Text>
         {options?.textInput && (
           <TextInput
+            ref={(ref) => (this.textInput = ref)}
+            returnKeyType="next"
+            caretHidden
+            autoCorrect={false}
+            onSubmitEditing={() => {
+              this.textInput?.current?.blur();
+              this.slider?.goToSlide(3, true);
+            }}
             style={styles.textInput}
             placeholder={options.placeholder}
             placeholderTextColor={'rgba(255, 255, 255, 0.50)'}

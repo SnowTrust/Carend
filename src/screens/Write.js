@@ -5,7 +5,7 @@ import {useTheme} from '@react-navigation/native';
 import {Icon} from 'react-native-eva-icons';
 import moment from 'moment';
 import {useSelector, useDispatch} from 'react-redux';
-import {addNote, updateNote} from '../store/slices';
+import {addNote, updateNote, deleteNote} from '../store/slices';
 import WriteStyle from '../styles/Write';
 import Emoji from 'react-native-emoji';
 import WritingBox from '../components/WritingBox';
@@ -22,12 +22,19 @@ const Write = (props) => {
   const {colors} = useTheme();
   const style = WriteStyle();
 
-  const today = moment().startOf('day');
-  const shouldUpdateByDate = moment(today).isSame(moment(_date), 'd');
+  const shouldUpdateByDate =
+    moment().format('YYYY-MM-D') === moment(_date).format('YYYY-MM-D');
 
   const dispatch = useDispatch();
   const {notebooks} = useSelector((state) => state.notebook);
   const {helperText} = useSelector((state) => state.settings);
+
+  const deleteAndExit = () => {
+    const noteId = _id;
+    const notebookId = moment(_date).format('YYYY');
+    dispatch(deleteNote({noteId, notebookId}));
+    navigation.navigate('Home');
+  };
 
   const saveAndExit = () => {
     if (mood?.length > 0 || (note?.length > 0 && note !== helpText)) {
@@ -70,14 +77,29 @@ const Write = (props) => {
 
   return (
     <View style={style.container}>
-      <Icon
-        name="arrow-ios-back"
-        width={40}
-        height={40}
-        fill={colors.notification}
-        style={style.headerIcon}
-        onPress={() => saveAndExit()}
-      />
+      <View style={style.iconContainer}>
+        <Icon
+          name="arrow-ios-back"
+          width={40}
+          height={40}
+          fill={colors.notification}
+          style={style.headerIcon}
+          onPress={() => saveAndExit()}
+        />
+        {_id !== null && (
+          <Icon
+            name="trash-outline"
+            width={30}
+            height={30}
+            fill={'#dc3545'}
+            style={style.headerIcon}
+            onPress={() => {
+              deleteAndExit();
+            }}
+          />
+        )}
+      </View>
+
       <Text style={style.headerDayContainer}>
         {moment(_date).format('dddd')}
       </Text>

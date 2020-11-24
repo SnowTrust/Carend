@@ -37,6 +37,14 @@ const EntryCardStyle = () => {
       justifyContent: 'center',
       flexDirection: 'column',
     },
+    mood: {
+      flex: 1,
+      height: 30,
+      width: 30,
+      fontSize: 20,
+      textAlign: 'center',
+      textAlignVertical: 'center',
+    },
   });
 };
 
