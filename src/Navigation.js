@@ -8,6 +8,7 @@ import {LightTheme, DarkTheme} from './utils/Themes';
 import Home from './screens/Home';
 import Write from './screens/Write';
 import Settings from './screens/Settings';
+import Search from './screens/Search';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,11 @@ const Navigation = () => {
           <Stack.Screen
             name="Settings"
             component={Settings}
+            options={{...TransitionPresets.ModalPresentationIOS}}
+          />
+          <Stack.Screen
+            name="Search"
+            component={Search}
             options={{...TransitionPresets.ModalPresentationIOS}}
           />
         </Stack.Navigator>

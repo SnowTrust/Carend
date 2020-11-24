@@ -10,6 +10,7 @@ const SettingsStyle = () => {
       flex: 1,
       flexDirection: 'column',
       paddingHorizontal: 10,
+      paddingBottom: 3,
     },
     headerIcon: {
       padding: 10,
@@ -51,7 +52,7 @@ const SettingsStyle = () => {
     copyrightContainer: {
       flex: 1,
       justifyContent: 'flex-end',
-      alignItems: "center"
+      alignItems: 'center',
     },
     copyrightText: {
       textAlign: 'center',
@@ -63,7 +64,7 @@ const SettingsStyle = () => {
       width: 320,
       height: 320,
       margin: 10,
-      alignContent: "center"
+      alignContent: 'center',
     },
     username: {
       justifyContent: 'center',
