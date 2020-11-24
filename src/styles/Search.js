@@ -24,6 +24,10 @@ const SearchStyle = () => {
       textAlign: 'center',
       color: colors.text,
     },
+    loading: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   });
 };
 
