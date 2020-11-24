@@ -1,8 +1,8 @@
 # Carend Diary!
 ![Master](https://github.com/SnowTrust/Carend/workflows/Deploy%20App%20CI/badge.svg)
 ![Dev](https://github.com/SnowTrust/Carend/workflows/On%20Push%20CI/badge.svg)
-Carend is a free, community driven Diary and Mood Tracker.
 
+Carend is a free, community driven Diary and Mood Tracker.
 
 ## Developement
 As every react-native project you must [set things up](https://reactnative.dev/docs/environment-setup).
