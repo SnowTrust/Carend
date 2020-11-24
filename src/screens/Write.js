@@ -14,7 +14,6 @@ import {MoodList, helperText as helpText} from '../utils';
 
 const Write = (props) => {
   const {_mood, _note, _id, _date} = props?.route?.params || {};
-  console.log(props?.route?.params);
 
   const [mood, setMood] = useState(_mood);
   const [note, setNote] = useState(_note);

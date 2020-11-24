@@ -68,9 +68,9 @@ const Search = (props) => {
         <Text style={styles.headerText}>{year}</Text>
       </View>
       <CalendarList
-        current={moment().format('YYYY-MM-D')}
-        minDate={moment(`${year}-1-1`).format('YYYY-MM-D')}
-        maxDate={moment(`${year}-12-31`).format('YYYY-MM-D')}
+        current={moment().format('YYYY-MM-DD')}
+        minDate={moment(`${year}-01-01`).format('YYYY-MM-DD')}
+        maxDate={moment(`${year}-12-01`).format('YYYY-MM-DD')}
         onDayPress={(day) => {
           if (markedDates[day.dateString]) {
             searchEntryAndNavigate(day.dateString);
@@ -83,15 +83,16 @@ const Search = (props) => {
         futureScrollRange={12 - moment().format('MM')}
         scrollEnabled={true}
         showScrollIndicator={false}
+        disabledByDefault={false}
         style={{borderWidth: 0}}
         theme={{
           backgroundColor: colors.background,
           calendarBackground: colors.background,
-          textSectionTitleColor: colors.card,
+          textSectionTitleColor: colors.text,
           textSectionTitleDisabledColor: colors.notification,
           selectedDayBackgroundColor: colors.background,
           selectedDayTextColor: colors.text,
-          todayTextColor: colors.text,
+          todayTextColor: colors.primary,
           dayTextColor: colors.text,
           textDisabledColor: colors.notification,
           dotColor: colors.primary,
