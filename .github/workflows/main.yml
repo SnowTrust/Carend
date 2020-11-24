@@ -15,18 +15,18 @@ jobs:
         with:
           java-version: 1.8
       - name: Grant rights
-        run: ls && chmod +x build.gradle
+        run: ls && chmod +x android/build.gradle && chmod +x android/gradlew
       - name: Build with Gradle
         id: build
-        run: ./gradlew build
+        run: .android/gradlew build
       - name: Build Release AAB
         id: buildRelease
-        run: ./gradlew bundleRelease
+        run: .android/gradlew bundleRelease
       - name: Sign AAB
         id: sign
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: app/build/outputs/bundle/release
+          releaseDirectory: android/app/build/outputs/bundle/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -40,7 +40,7 @@ jobs:
         with:
           serviceAccountJson: service_account.json
           packageName: com.snowtrust.carend
-          releaseFile: app/build/outputs/bundle/release/app-release.aab
+          releaseFile: android/app/build/outputs/bundle/release/app-release.aab
           track: beta
           whatsNewDirectory: whatsnew/
       - name: Notify on Slack
