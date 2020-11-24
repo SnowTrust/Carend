@@ -16,6 +16,10 @@ jobs:
           java-version: 1.8
       - name: Grant rights
         run: ls && chmod +x android/build.gradle && chmod +x android/gradlew
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+      - name: Install dependencies
+        run: npm install
       - name: Build with Gradle
         id: build
         run: cd android && ./gradlew build
