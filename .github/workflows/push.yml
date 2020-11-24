@@ -2,7 +2,8 @@ name: On Push CI
 on:
   push:
     branches:
-      - 'development'
+      - development
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
