@@ -89,6 +89,11 @@ const WriteStyle = () => {
     scrollStyle: {
       paddingHorizontal: 15,
     },
+    iconContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: 10,
+    },
   });
 };
 
