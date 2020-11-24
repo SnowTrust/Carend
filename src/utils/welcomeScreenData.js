@@ -1,7 +1,7 @@
 export default [
   {
     title: 'Hello, Nice to have you here',
-    text: "Let's get things up and running",
+    text: "Let's get things up and running\n",
     bg: require('../../assets/images/1.png'),
     options: {
       image: true,
@@ -12,7 +12,7 @@ export default [
   {
     title: 'How Carend Diary works? ',
     text:
-      "Actually I act like a paper Diary\nbut with a mood tracker.\nYou can write a note everyday,\nYou can modify it till the end of the day,\nYou can also tear a page when you want,\n And if you don't know what to write, i can help you",
+      "Actually I act like a paper Diary\nbut with a mood tracker.\nYou can write a note everyday,\nYou can modify it till the end of the day,\nYou can also tear a page when you want,\n And if you don't know what to write, i can help you\n",
     bg: require('../../assets/images/2.png'),
   },
   {
@@ -23,7 +23,7 @@ export default [
       textInput: true,
       value: 'username',
       setValue: 'setUsername',
-      placeholder: 'John Doe',
+      placeholder: 'Jack Sparrow',
     },
   },
   {

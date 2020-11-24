@@ -2,6 +2,7 @@ import React from 'react';
 import {useTheme} from '@react-navigation/native';
 import {Text, View, Pressable} from 'react-native';
 import {Icon} from 'react-native-eva-icons';
+import Emoji from 'react-native-emoji';
 import EntryCardStyle from '../styles/EntryCard';
 import {useNavigation} from '@react-navigation/native';
 import {formatEntryForCard} from '../utils';
@@ -27,6 +28,7 @@ const EntryCard = (props) => {
         <Text style={style.hour}>{hour}</Text>
         <Text style={style.date}>{date}</Text>
       </View>
+      <Emoji name={data.mood} style={style.mood} />
       <Icon
         name="arrow-ios-forward"
         width={30}

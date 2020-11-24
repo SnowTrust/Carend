@@ -16,7 +16,9 @@ const NoteBookCard = (props) => {
         navigation.navigate('Search', {year});
       }}>
       <Text style={style.year}>{year}</Text>
-      <Text style={style.entries}>{entries} Entries</Text>
+      <Text style={style.entries}>
+        {entries} {entries === 1 ? 'Entry' : 'Entries'}
+      </Text>
     </Pressable>
   );
 };

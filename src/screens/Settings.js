@@ -64,7 +64,8 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Dark mode</Text>
           <Text style={style.menuTextHint}>
-            Activates or desactivates the dark theme in the App.
+            &#127770;Activates or &#127773;desactivates the dark theme in the
+            App.
           </Text>
         </View>
         <Switch
@@ -81,7 +82,7 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Helper</Text>
           <Text style={style.menuTextHint}>
-            Activates or desactivates the helper text in the editor.
+            &#128171;Activates or desactivates the helper text in the editor.
           </Text>
         </View>
         <Switch
@@ -100,7 +101,8 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Report a bug</Text>
           <Text style={style.menuTextHint}>
-            Noticed an bug or a typo, tell us here an we'll fix it ASAP.
+            &#128297;Noticed an bug or a typo, tell us here an we'll fix it
+            ASAP.
           </Text>
         </View>
         <Icon
@@ -119,7 +121,7 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Request a feature</Text>
           <Text style={style.menuTextHint}>
-            Have a brilliant idea? Tell us how to bring it to life.
+            &#9889;Have a brilliant idea? Tell us how to bring it to life.
           </Text>
         </View>
         <Icon
@@ -137,7 +139,7 @@ const Settings = () => {
         }>
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Legal Notice</Text>
-          <Text style={style.menuTextHint}>Some Legal things.</Text>
+          <Text style={style.menuTextHint}>&#128196;Some Legal things.</Text>
         </View>
         <Icon
           name="arrow-forward-outline"
