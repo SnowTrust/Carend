@@ -23,7 +23,7 @@ export default [
       textInput: true,
       value: 'username',
       setValue: 'setUsername',
-      placeholder: 'John Doe',
+      placeholder: 'Jack Sparrow',
     },
   },
   {
