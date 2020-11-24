@@ -18,20 +18,14 @@ export default class Welcome extends React.Component {
     this.saveUserData = props.saveUserData.bind(this);
     this.state = {
       username: '',
-      password: '',
     };
   }
 
   checkData = (index, lastIndex) => {
-    const {username, password} = this.state;
+    const {username} = this.state;
     switch (index) {
-      case 2:
-        if (username === '' || username === null) {
-          this.slider?.goToSlide(lastIndex, true);
-        }
-        break;
       case 3:
-        if (password === '' || password === null) {
+        if (username === '' || username === null) {
           this.slider?.goToSlide(lastIndex, true);
         }
         break;
@@ -57,14 +51,14 @@ export default class Welcome extends React.Component {
         <Text
           style={[
             styles.title,
-            options.textWhite === true && {color: '#fdfdfd'},
+            options?.textWhite === true && {color: '#fdfdfd'},
           ]}>
           {item.title}
         </Text>
         <Text
           style={[
             styles.text,
-            options.textWhite === true && {color: '#fdfdfd'},
+            options?.textWhite === true && {color: '#fdfdfd'},
           ]}>
           {item.text}
         </Text>
@@ -76,8 +70,6 @@ export default class Welcome extends React.Component {
             onChangeText={(text) => {
               if (options.value === 'username') {
                 this.setState({username: text});
-              } else {
-                this.setState({password: text});
               }
             }}
             value={this.state[options.value]}
@@ -86,10 +78,10 @@ export default class Welcome extends React.Component {
         {options?.button && (
           <TouchableOpacity
             style={styles.button}
-            disabled={!(this.state.username && this.state.password)}
+            disabled={!this.state.username}
             onPress={() => {
-              if (this.state.username && this.state.password) {
-                this.saveUserData(this.state.username, this.state.password);
+              if (this.state.username) {
+                this.saveUserData(this.state.username);
               }
             }}>
             <Text style={styles.buttonText}>{options.buttonText}</Text>

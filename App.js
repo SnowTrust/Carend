@@ -30,9 +30,8 @@ const App = () => {
   const [firstTimeUser, setFirstTimeUser] = useState(true);
   const [isReady, setIsReady] = useState(false);
 
-  const saveUserData = async (username, password) => {
-    console.log('username-i', username, 'password-i', password);
-    await saveCredentials(username, password);
+  const saveUserData = async (username) => {
+    await saveCredentials(username, username);
     setFirstTimeUser(false);
   };
 

@@ -10,26 +10,20 @@ export default [
     },
   },
   {
-    title: 'What is your beautifull name ?',
-    text: '',
+    title: 'How Carend Diary works? ',
+    text:
+      "Actually I act like a paper Diary\nbut with a mood tracker.\nYou can write a note everyday,\nYou can modify it till the end of the day,\nYou can also tear a page when you want,\n And if you don't know what to write, i can help you",
     bg: require('../../assets/images/2.png'),
+  },
+  {
+    title: 'What is your beautifull name ?',
+    text: 'How should i call you ?',
+    bg: require('../../assets/images/3.png'),
     options: {
       textInput: true,
       value: 'username',
       setValue: 'setUsername',
       placeholder: 'John Doe',
-    },
-  },
-  {
-    title: "Let's secure your app",
-    text:
-      "This key will be used to encrypt and decrypt your data.\nPlease make sure you don't forget it",
-    bg: require('../../assets/images/3.png'),
-    options: {
-      textInput: true,
-      value: 'password',
-      setValue: 'setPassword',
-      placeholder: 'SuperSecure',
     },
   },
   {
