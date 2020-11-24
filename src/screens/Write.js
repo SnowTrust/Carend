@@ -32,7 +32,7 @@ const Write = (props) => {
   const saveAndExit = () => {
     if (mood?.length > 0 || (note?.length > 0 && note !== helpText)) {
       const notebookId = moment().format('YYYY');
-      if (shouldUpdateByDate === true && _id !== undefined && _id !== null) {
+      if (shouldUpdateByDate === true && _id >= 0) {
         // Updating here
         const newNote = {
           mood,
@@ -41,7 +41,7 @@ const Write = (props) => {
           id: _id,
         };
         dispatch(updateNote({newNote, notebookId}));
-      } else {
+      } else if (!_id) {
         // Adding note here
         const newNote = {
           mood,

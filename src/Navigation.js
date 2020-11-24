@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 
 const Navigation = () => {
   const {darkTheme} = useSelector((state) => state.settings);
-  const options = {...TransitionPresets.ModalPresentationIOS};
+  const options = {...TransitionPresets.ModalSlideFromBottomIOS};
   return (
     <AppearanceProvider>
       <NavigationContainer theme={darkTheme === true ? DarkTheme : LightTheme}>
@@ -32,7 +32,7 @@ const Navigation = () => {
           <Stack.Screen
             name="Settings"
             component={Settings}
-            options={options}
+            options={{...TransitionPresets.ModalPresentationIOS}}
           />
         </Stack.Navigator>
       </NavigationContainer>

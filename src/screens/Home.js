@@ -97,7 +97,7 @@ const Home = () => {
           <Text style={style.entriesHeaderText}>Recent Entries</Text>
           <View style={style.entriesListViewContainer}>
             <FlatList
-              data={notebooks[moment().format('YYYY')]}
+              data={notebooks[moment().format('YYYY')].reverse()}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => {
                 return <EntryCard data={item} />;
