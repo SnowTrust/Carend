@@ -5,6 +5,7 @@ import {useTheme} from '@react-navigation/native';
 import {Icon} from 'react-native-eva-icons';
 import moment from 'moment';
 import {useSelector, useDispatch} from 'react-redux';
+import {useBackHandler} from '@react-native-community/hooks';
 import {addNote, updateNote} from '../store/slices';
 import WriteStyle from '../styles/Write';
 import Emoji from 'react-native-emoji';
@@ -22,8 +23,8 @@ const Write = (props) => {
   const {colors} = useTheme();
   const style = WriteStyle();
 
-  const today = moment().startOf('day');
-  const shouldUpdateByDate = moment(today).isSame(moment(_date), 'd');
+  const shouldUpdateByDate =
+    moment().format('YYYY-MM-D') === moment(_date).format('YYYY-MM-D');
 
   const dispatch = useDispatch();
   const {notebooks} = useSelector((state) => state.notebook);
@@ -61,6 +62,10 @@ const Write = (props) => {
     }
     navigation.navigate('Home');
   };
+
+  useBackHandler(() => {
+    saveAndExit();
+  });
 
   useEffect(() => {
     if (shouldUpdateByDate === false) {

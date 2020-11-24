@@ -21,7 +21,7 @@ const FloatingButton = () => {
         navigation.navigate('Write', {
           _mood: entry?.mood || '',
           _note: entry?.note || '',
-          _id: entry?.id || null,
+          _id: entry?.id === 0 ? entry?.id : entry?.id || null,
           _date: entry?.date || moment().format(),
         })
       }>
