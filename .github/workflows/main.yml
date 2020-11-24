@@ -20,18 +20,13 @@ jobs:
         uses: actions/setup-node@v2.1.2
       - name: Install dependencies
         run: npm install
+      - name: Decrypt keystore
+        run: cd android/app && gpg --quiet --batch --yes --decrypt --passphrase="$KEYSTORE_DECRYPT_PASSWORD" --output ./carend-upload.keystore carend-upload.keystore.gpg && cd ../../
+      - name: Setup gradle.properties
+        run: mkdir -p ~/.gradle/ && echo '${{ secrets.GRADLE_PROPERTIES }}' > ~/.gradle/gradle.properties
       - name: Build Release AAB
         id: buildRelease
         run: cd android && ./gradlew bundleRelease
-      - name: Sign AAB
-        id: sign
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDirectory: android/app/build/outputs/bundle/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.KEYSTORE_ALIAS }}
-          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
       - name: Create service_account.json
         id: createServiceAccount
         run: echo '${{ secrets.PLAY_STORE_SECRET_JSON }}' > service_account.json
