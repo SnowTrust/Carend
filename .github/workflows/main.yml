@@ -36,9 +36,8 @@ jobs:
         with:
           serviceAccountJson: service_account.json
           packageName: com.snowtrust.carend
-          releaseFile: android/app/build/outputs/bundle/release/app-release.aab
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           track: beta
-          whatsNewDirectory: whatsnew/
       - name: Notify on Slack
         uses: act10ns/slack@v1
         with:
