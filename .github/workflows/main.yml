@@ -27,6 +27,12 @@ jobs:
       - name: Build Release AAB
         id: buildRelease
         run: cd android && ./gradlew bundleRelease
+      - name: Upload AAB
+        id: uploadArtifact  
+        uses: actions/upload-artifact@v1
+        with:
+            name: app-release
+            path: app/build/outputs/bundle/release/app-release.aab
       - name: Create service_account.json
         id: createServiceAccount
         run: echo '${{ secrets.PLAY_STORE_SECRET_JSON }}' > service_account.json
