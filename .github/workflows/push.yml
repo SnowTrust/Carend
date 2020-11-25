@@ -26,9 +26,9 @@ jobs:
         run: cd android/app && gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.KEYSTORE_DECRYPT_PASSWORD }}" --output ./carend-upload.keystore carend-upload.keystore.gpg && cd ../../
       - name: Setup gradle.properties
         run: mkdir -p ~/.gradle/ && echo '${{ secrets.GRADLE_PROPERTIES }}' > ~/.gradle/gradle.properties
-      - name: Build Release AAB
+      - name: Build Release APK
         id: buildRelease
-        run: cd android && ./gradlew assembleRelease
+        run: cd android && USER_HOME=$HOME ./gradlew assembleRelease
       - name: Upload AAB
         id: uploadArtifact  
         uses: actions/upload-artifact@v1

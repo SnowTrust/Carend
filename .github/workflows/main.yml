@@ -26,13 +26,13 @@ jobs:
         run: mkdir -p ~/.gradle/ && echo '${{ secrets.GRADLE_PROPERTIES }}' > ~/.gradle/gradle.properties
       - name: Build Release AAB
         id: buildRelease
-        run: cd android && ./gradlew bundleRelease
+        run: cd android && USER_HOME=$HOME ./gradlew bundleRelease && cd ../
       - name: Upload AAB
         id: uploadArtifact  
         uses: actions/upload-artifact@v1
         with:
             name: app-release
-            path: app/build/outputs/bundle/release/app-release.aab
+            path: android/app/build/outputs/bundle/release/app-release.aab
       - name: Create service_account.json
         id: createServiceAccount
         run: echo '${{ secrets.PLAY_STORE_SECRET_JSON }}' > service_account.json
