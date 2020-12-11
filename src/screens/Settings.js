@@ -9,8 +9,7 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import {
   setLanguage,
@@ -64,8 +63,7 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Dark mode</Text>
           <Text style={style.menuTextHint}>
-            &#127770;Activates or &#127773;desactivates the dark theme in the
-            App.
+            &#127770; Activates or &#127773;desactivates the dark theme.
           </Text>
         </View>
         <Switch
@@ -82,7 +80,7 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Helper</Text>
           <Text style={style.menuTextHint}>
-            &#128171;Activates or desactivates the helper text in the editor.
+            &#128171; Activates or desactivates the helper text in the editor.
           </Text>
         </View>
         <Switch
@@ -91,6 +89,23 @@ const Settings = () => {
           ios_backgroundColor={colors.primary}
           onValueChange={() => dispatch(setHelperText())}
           value={helperText}
+        />
+      </Pressable>
+      <Pressable
+        style={style.menuItemContainer}
+        onPress={() => navigation.navigate('Import-Export')}>
+        <View style={style.menuTextContainer}>
+          <Text style={style.menuTextHeader}>Export or import data</Text>
+          <Text style={style.menuTextHint}>
+            &#128190; Export or import all the data inside this app as a glorious Json file.
+          </Text>
+        </View>
+        <Icon
+          name="arrow-forward-outline"
+          width={20}
+          height={20}
+          fill={colors.text}
+          style={style.menuIcon}
         />
       </Pressable>
       <Pressable
