@@ -37,21 +37,27 @@ const IEStyles = () => {
       color: colors.notification,
     },
     buttonsContainer: {
-        flexDirection: 'row'
+      flexDirection: 'row',
+      position: 'absolute',
+      bottom: 0,
     },
     button: {
-        flex: 1,
-        margin: 20,
-        backgroundColor: colors.primary,
-        padding: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10
+      flex: 1,
+      margin: 20,
+      backgroundColor: colors.primary,
+      padding: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 10,
     },
     buttonText: {
-        color: colors.text,
-        fontFamily: Poppins.SemiBold
-    }
+      color: colors.text,
+      fontFamily: Poppins.SemiBold,
+    },
+    dataContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   });
 };
 

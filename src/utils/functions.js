@@ -1,5 +1,6 @@
 import moment from 'moment';
 import * as Keychain from 'react-native-keychain';
+import RNFetchBlob from 'rn-fetch-blob';
 
 export const formatNotebooks = (notebooks) => {
   const returnData = [];
@@ -76,4 +77,43 @@ export const getMarkedDates = (notebook) => {
     returnData[String(date)] = {marked: true};
   }
   return returnData;
+};
+
+export const writeFile = async (data) => {
+  try {
+    const {fs, base64} = RNFetchBlob;
+    const filePath = `${fs.dirs.DocumentDir}/Carend_${moment().format(
+      'YYYYMMD_hhmmss',
+    )}.txt`;
+    const srtingifiedData = JSON.stringify(data);
+    let result = await fs.createFile(
+      filePath,
+      base64.encode(srtingifiedData),
+      'base64',
+    );
+    return result;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const deleteFile = async (filePath) => {
+  try {
+    const {fs} = RNFetchBlob;
+    const result = await fs.unlink(filePath);
+    return result;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const readFile = async (filePath) => {
+  try {
+    const {fs} = RNFetchBlob;
+    const result = await fs.readFile(filePath, 'base64');
+    const data = JSON.parse(result);
+    return data;
+  } catch (err) {
+    throw err;
+  }
 };

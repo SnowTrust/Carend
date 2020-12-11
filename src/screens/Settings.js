@@ -97,7 +97,7 @@ const Settings = () => {
         <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Export or import data</Text>
           <Text style={style.menuTextHint}>
-            &#128190; Export or import all the data inside this app as a glorious Json file.
+            &#128190; Export or import all the data in and encoded file.
           </Text>
         </View>
         <Icon
