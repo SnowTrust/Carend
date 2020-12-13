@@ -82,9 +82,10 @@ export const getMarkedDates = (notebook) => {
 export const writeFile = async (data) => {
   try {
     const {fs, base64} = RNFetchBlob;
-    const filePath = `${fs.dirs.DocumentDir}/Carend_${moment().format(
+    const filePath = `${fs.dirs.DocumentDir}/Carend_${moment().format( 
       'YYYYMMD_hhmmss',
-    )}.txt`;
+    )}.json
+    `;
     const srtingifiedData = JSON.stringify(data);
     let result = await fs.createFile(
       filePath,
@@ -111,6 +112,7 @@ export const readFile = async (filePath) => {
   try {
     const {fs} = RNFetchBlob;
     const result = await fs.readFile(filePath, 'base64');
+    console.log(result);
     const data = JSON.parse(result);
     return data;
   } catch (err) {

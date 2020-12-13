@@ -4,6 +4,8 @@ import {
   _setLanguage,
   _setUsername,
   _setHelperText,
+  _setLastExport,
+  _setLasImport,
 } from '../actions';
 
 const initialState = {
@@ -11,6 +13,8 @@ const initialState = {
   helperText: false,
   username: '',
   language: 'en',
+  lastExport: null,
+  lastImport: null,
 };
 
 const settingsSlice = createSlice({
@@ -21,6 +25,8 @@ const settingsSlice = createSlice({
     setHelperText: _setHelperText,
     setUsername: _setUsername,
     setLanguage: _setLanguage,
+    setLastImport: _setLasImport,
+    setLastExport: _setLastExport,
   },
 });
 
@@ -30,4 +36,6 @@ export const {
   setHelperText,
   setUsername,
   setLanguage,
+  setLastImport,
+  setLastExport,
 } = settingsSlice.actions;

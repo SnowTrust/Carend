@@ -4,6 +4,8 @@ import settingsReducer, {
   setHelperText,
   setUsername,
   setLanguage,
+  setLastExport,
+  setLastImport,
 } from './settings';
 
 export {
@@ -16,4 +18,6 @@ export {
   setHelperText,
   setLanguage,
   setUsername,
+  setLastExport,
+  setLastImport,
 };

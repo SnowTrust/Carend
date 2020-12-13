@@ -13,3 +13,11 @@ export const _setUsername = (state, action) => {
 export const _setLanguage = (state, action) => {
   state.language = action.payload;
 };
+
+export const _setLastExport = (state, action) => {
+  state.lastExport = action.payload;
+};
+
+export const _setLasImport = (state, action) => {
+  state.lastImport = action.payload;
+};

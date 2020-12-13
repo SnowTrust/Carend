@@ -4,6 +4,8 @@ import {
   _setUsername,
   _setHelperText,
   _setLanguage,
+  _setLasImport,
+  _setLastExport,
 } from './settings';
 
 export {
@@ -14,4 +16,6 @@ export {
   _setDarkTheme,
   _setUsername,
   _setLanguage,
+  _setLasImport,
+  _setLastExport,
 };
