@@ -1,5 +1,6 @@
 import moment from 'moment';
 import * as Keychain from 'react-native-keychain';
+import RNFS from 'react-native-fs';
 import RNFetchBlob from 'rn-fetch-blob';
 
 export const formatNotebooks = (notebooks) => {
@@ -79,20 +80,12 @@ export const getMarkedDates = (notebook) => {
   return returnData;
 };
 
-export const writeFile = async (data) => {
+export const writeFile = async (data, fileName) => {
   try {
-    const {fs, base64} = RNFetchBlob;
-    const filePath = `${fs.dirs.DocumentDir}/Carend_${moment().format( 
-      'YYYYMMD_hhmmss',
-    )}.json
-    `;
+    const filePath = `${RNFS.ExternalDirectoryPath}/${fileName}`;
     const srtingifiedData = JSON.stringify(data);
-    let result = await fs.createFile(
-      filePath,
-      base64.encode(srtingifiedData),
-      'base64',
-    );
-    return result;
+    const result = await RNFS.writeFile(filePath, srtingifiedData);
+    return filePath;
   } catch (err) {
     throw err;
   }
@@ -100,18 +93,19 @@ export const writeFile = async (data) => {
 
 export const deleteFile = async (filePath) => {
   try {
-    const {fs} = RNFetchBlob;
-    const result = await fs.unlink(filePath);
+    const result = await RNFS.unlink(filePath);
     return result;
   } catch (err) {
     throw err;
   }
 };
 
-export const readFile = async (filePath) => {
+export const readFile = async (res) => {
   try {
-    const {fs} = RNFetchBlob;
-    const result = await fs.readFile(filePath, 'base64');
+    console.log(res);
+    const absPath = await RNFetchBlob.fs.stat(res.uri);
+    console.log(absPath);
+    const result = await RNFS.readFile(absPath + res.name);
     console.log(result);
     const data = JSON.parse(result);
     return data;

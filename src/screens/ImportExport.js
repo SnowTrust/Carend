@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
-import {View, Text, Pressable, ActivityIndicator} from 'react-native';
-import {Icon} from 'react-native-eva-icons';
-import {useTheme, useNavigation} from '@react-navigation/native';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState } from 'react';
+import { View, Text, Pressable, ActivityIndicator, PermissionsAndroid } from 'react-native';
+import { Icon } from 'react-native-eva-icons';
+import { useTheme, useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
 import DocumentPicker from 'react-native-document-picker';
 import Share from 'react-native-share';
-import {setLastImport, setLastExport} from '../store/slices';
-import {writeFile, deleteFile, readFile} from '../utils';
+import moment from 'moment';
+import { setLastImport, setLastExport } from '../store/slices';
+import { writeFile, deleteFile, readFile } from '../utils';
 import IEStyles from '../styles/ImportExport';
 
 const ImportExport = () => {
   const style = IEStyles();
-  const {colors} = useTheme();
+  const { colors } = useTheme();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [retrievedData, setRetrievedData] = useState(null);
@@ -22,10 +23,12 @@ const ImportExport = () => {
   const exportData = async (data) => {
     try {
       setLoading(true);
-      const filePath = await writeFile(data);
+      const exportDate = moment().format('YYYYMMD_hhmmss');
+      const fileName = `Carend_backup_${exportDate}.json`;
+      const filePath = await writeFile(data, fileName);
       const options = {
-        title: 'Carend_backup.json',
-        subject: 'Carend backup',
+        title: fileName,
+        subject: fileName,
         message:
           'Hello,\nI have made a backup of my Carend.\nCan you please save it somewhere safe ?\nIt is a diary and you can get it here https://play.google.com/store/apps/details?id=com.snowtrust.carend\n\nThanks <3.',
         type: 'application/json',
@@ -41,14 +44,35 @@ const ImportExport = () => {
     }
   };
 
+  const requestCameraPermission = async () => {
+    try {
+      const options = {
+        title: "Carend would like to access your files",
+        message:
+          "Cool Photo App needs access to your camera " +
+          "so you can take awesome pictures.",
+        buttonNeutral: "Ask Me Later",
+        buttonNegative: "Cancel",
+        buttonPositive: "Grant"
+      };
+      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE, options);
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("You can use the camera");
+      } else {
+        setCanRead(false);
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
   const importData = async () => {
     try {
       setLoading(true);
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.plainText],
+        type: 'application/json',
       });
-      const filePath = `${res.uri}/${res.name}`;
-      const data = await readFile(filePath);
+      const data = await readFile(res);
       console.log(data);
       setLoading(false);
     } catch (err) {
@@ -78,11 +102,12 @@ const ImportExport = () => {
         ) : retrievedData === null ? (
           <Text>Noting</Text>
         ) : (
-          <Text>Daata</Text>
-        )}
+              <Text>Daata</Text>
+            )}
       </View>
       <View style={style.buttonsContainer}>
         <Pressable
+          disabled={isLoading}
           style={style.button}
           onPress={() => {
             importData();
@@ -90,6 +115,7 @@ const ImportExport = () => {
           <Text style={style.buttonText}>Import</Text>
         </Pressable>
         <Pressable
+          disabled={isLoading}
           style={style.button}
           onPress={() => {
             exportData(state);
