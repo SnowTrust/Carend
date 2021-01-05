@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {ToastAndroid} from 'react-native';
 import * as Keychain from 'react-native-keychain';
 import RNFS from 'react-native-fs';
 import RNFetchBlob from 'rn-fetch-blob';
@@ -82,11 +83,14 @@ export const getMarkedDates = (notebook) => {
 
 export const writeFile = async (data, fileName) => {
   try {
-    const filePath = `${RNFS.ExternalDirectoryPath}/${fileName}`;
+    const filePath = `${RNFS.ExternalStorageDirectoryPath}/Carend/Backup/${fileName}`;
+    await RNFS.mkdir(`${RNFS.ExternalStorageDirectoryPath}/Carend/Backup/`);
     const srtingifiedData = JSON.stringify(data);
     const result = await RNFS.writeFile(filePath, srtingifiedData);
+    ToastAndroid.show(`File saved at ${filePath}`, ToastAndroid.LONG);
     return filePath;
   } catch (err) {
+    console.log(err);
     throw err;
   }
 };
@@ -102,12 +106,9 @@ export const deleteFile = async (filePath) => {
 
 export const readFile = async (res) => {
   try {
-    console.log(res);
     const absPath = await RNFetchBlob.fs.stat(res.uri);
-    console.log(absPath);
-    const result = await RNFS.readFile(absPath + res.name);
-    console.log(result);
-    const data = JSON.parse(result);
+    const result = await RNFS.readFile(absPath.path);
+    const data = await JSON.parse(result);
     return data;
   } catch (err) {
     throw err;

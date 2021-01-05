@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
-import { View, Text, Pressable, ActivityIndicator, PermissionsAndroid } from 'react-native';
-import { Icon } from 'react-native-eva-icons';
-import { useTheme, useNavigation } from '@react-navigation/native';
-import { useSelector, useDispatch } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  Pressable,
+  ActivityIndicator,
+  PermissionsAndroid,
+} from 'react-native';
+import {Icon} from 'react-native-eva-icons';
+import {useTheme, useNavigation} from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux';
 import DocumentPicker from 'react-native-document-picker';
 import Share from 'react-native-share';
 import moment from 'moment';
-import { setLastImport, setLastExport } from '../store/slices';
-import { writeFile, deleteFile, readFile } from '../utils';
+import {setLastImport, setLastExport} from '../store/slices';
+import {writeFile, deleteFile, readFile} from '../utils';
 import IEStyles from '../styles/ImportExport';
 
 const ImportExport = () => {
   const style = IEStyles();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [retrievedData, setRetrievedData] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [isErrored, setErrored] = useState(false);
+  const [canReadAndWrite, setCanReadAndWrite] = useState(false);
   const state = useSelector((state) => state);
 
   const exportData = async (data) => {
     try {
       setLoading(true);
       const exportDate = moment().format('YYYYMMD_hhmmss');
-      const fileName = `Carend_backup_${exportDate}.json`;
+      const fileName = `${exportDate}.json`;
       const filePath = await writeFile(data, fileName);
       const options = {
         title: fileName,
@@ -36,7 +43,6 @@ const ImportExport = () => {
         url: `file://${filePath}`,
       };
       await Share.open(options);
-      await deleteFile(filePath);
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -44,22 +50,31 @@ const ImportExport = () => {
     }
   };
 
-  const requestCameraPermission = async () => {
+  const requestFilePermissions = async () => {
     try {
       const options = {
-        title: "Carend would like to access your files",
+        title: 'Carend would like to access your files',
         message:
-          "Cool Photo App needs access to your camera " +
-          "so you can take awesome pictures.",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
-        buttonPositive: "Grant"
+          'Cool Photo App needs access to your filrs ' +
+          'so you can export and import your backup.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'Grant',
       };
-      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE, options);
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use the camera");
+      const granted = await PermissionsAndroid.requestMultiple(
+        [
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        ],
+        options,
+      );
+      if (
+        granted['android.permission.READ_EXTERNAL_STORAGE'] &&
+        granted['android.permission.WRITE_EXTERNAL_STORAGE'] === 'granted'
+      ) {
+        setCanReadAndWrite(true);
       } else {
-        setCanRead(false);
+        setCanReadAndWrite(false);
       }
     } catch (err) {
       console.warn(err);
@@ -83,6 +98,10 @@ const ImportExport = () => {
     }
   };
 
+  useEffect(() => {
+    requestFilePermissions();
+  }, []);
+
   return (
     <View style={style.container}>
       <View style={style.headerContainer}>
@@ -102,12 +121,12 @@ const ImportExport = () => {
         ) : retrievedData === null ? (
           <Text>Noting</Text>
         ) : (
-              <Text>Daata</Text>
-            )}
+          <Text>Daata</Text>
+        )}
       </View>
       <View style={style.buttonsContainer}>
         <Pressable
-          disabled={isLoading}
+          disabled={isLoading && canReadAndWrite}
           style={style.button}
           onPress={() => {
             importData();
@@ -115,7 +134,7 @@ const ImportExport = () => {
           <Text style={style.buttonText}>Import</Text>
         </Pressable>
         <Pressable
-          disabled={isLoading}
+          disabled={isLoading && canReadAndWrite}
           style={style.button}
           onPress={() => {
             exportData(state);
