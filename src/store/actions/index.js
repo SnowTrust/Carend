@@ -1,4 +1,4 @@
-import {_addNote, _updateNote, _deleteNote} from './notebook';
+import {_addNote, _updateNote, _deleteNote, _restoreNotes} from './notebook';
 import {
   _setDarkTheme,
   _setUsername,
@@ -6,6 +6,7 @@ import {
   _setLanguage,
   _setLasImport,
   _setLastExport,
+  _restoreSettings,
 } from './settings';
 
 export {
@@ -18,4 +19,6 @@ export {
   _setLanguage,
   _setLasImport,
   _setLastExport,
+  _restoreSettings,
+  _restoreNotes,
 };

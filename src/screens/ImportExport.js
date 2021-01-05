@@ -5,6 +5,7 @@ import {
   Pressable,
   ActivityIndicator,
   PermissionsAndroid,
+  ScrollView,
 } from 'react-native';
 import {Icon} from 'react-native-eva-icons';
 import {useTheme, useNavigation} from '@react-navigation/native';
@@ -12,8 +13,14 @@ import {useSelector, useDispatch} from 'react-redux';
 import DocumentPicker from 'react-native-document-picker';
 import Share from 'react-native-share';
 import moment from 'moment';
-import {setLastImport, setLastExport} from '../store/slices';
+import {
+  setLastImport,
+  setLastExport,
+  restoreNotes,
+  restoreSettings,
+} from '../store/slices';
 import {writeFile, deleteFile, readFile} from '../utils';
+import ImportedDataInfo from '../components/ImportedDataInfo';
 import IEStyles from '../styles/ImportExport';
 
 const ImportExport = () => {
@@ -77,7 +84,7 @@ const ImportExport = () => {
         setCanReadAndWrite(false);
       }
     } catch (err) {
-      console.warn(err);
+      setErrored(true);
     }
   };
 
@@ -88,7 +95,7 @@ const ImportExport = () => {
         type: 'application/json',
       });
       const data = await readFile(res);
-      console.log(data);
+      setRetrievedData(data);
       setLoading(false);
     } catch (err) {
       if (!DocumentPicker.isCancel(err)) {
@@ -96,6 +103,19 @@ const ImportExport = () => {
       }
       setLoading(false);
     }
+  };
+
+  const confirmImport = async () => {
+    console.log('trigged');
+    setLoading(true);
+    const {notebook, settings} = retrievedData;
+    console.log('1');
+    await dispatch(restoreSettings(settings));
+    console.log('2');
+    await dispatch(restoreNotes(notebook));
+    console.log('3');
+    setLoading(false);
+    console.log('4');
   };
 
   useEffect(() => {
@@ -115,15 +135,20 @@ const ImportExport = () => {
         />
         <Text style={style.headerText}>Import and Export</Text>
       </View>
-      <View style={style.dataContainer}>
+      <ScrollView contentContainerStyle={style.dataContainer}>
         {isLoading === true ? (
           <ActivityIndicator size={'large'} color={colors.primary} />
-        ) : retrievedData === null ? (
-          <Text>Noting</Text>
         ) : (
-          <Text>Daata</Text>
+          <View style={{flex: 1}}>
+            <ImportedDataInfo data={retrievedData} />
+            <Pressable
+              style={style.confirmButton}
+              onPress={() => confirmImport()}>
+              <Text style={style.buttonText}>Confirm importation</Text>
+            </Pressable>
+          </View>
         )}
-      </View>
+      </ScrollView>
       <View style={style.buttonsContainer}>
         <Pressable
           disabled={isLoading && canReadAndWrite}

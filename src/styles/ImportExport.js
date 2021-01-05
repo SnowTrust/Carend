@@ -50,6 +50,14 @@ const IEStyles = () => {
       alignItems: 'center',
       borderRadius: 10,
     },
+    confirmButton:{
+      margin: 20,
+      backgroundColor: colors.primary,
+      padding: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 10,
+    },
     buttonText: {
       color: colors.text,
       fontFamily: Poppins.SemiBold,
@@ -57,6 +65,7 @@ const IEStyles = () => {
     dataContainer: {
       justifyContent: 'center',
       alignItems: 'center',
+      flex: 1,
     },
   });
 };

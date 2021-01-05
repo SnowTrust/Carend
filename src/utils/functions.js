@@ -25,7 +25,7 @@ export const formatEntryForCard = (item) => {
 
 export const findEntry = (notebook, date) => {
   const year = moment(date).format('YYYY');
-  const found = notebook[year].find(
+  const found = notebook[year]?.find(
     (entry) =>
       moment(entry.date).format('D-MM-YYYY') ===
       moment(date).format('D-MM-YYYY'),
