@@ -19,7 +19,7 @@ import {
   restoreNotes,
   restoreSettings,
 } from '../store/slices';
-import {writeFile, deleteFile, readFile} from '../utils';
+import {writeFile, readFile} from '../utils';
 import ImportedDataInfo from '../components/ImportedDataInfo';
 import IEStyles from '../styles/ImportExport';
 
@@ -31,8 +31,11 @@ const ImportExport = () => {
   const [retrievedData, setRetrievedData] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [isErrored, setErrored] = useState(false);
+  const [isImport, setImport] = useState(false);
+  const [isImportAchieved, setImportAchieved] = useState(false);
   const [canReadAndWrite, setCanReadAndWrite] = useState(false);
   const state = useSelector((state) => state);
+  let {lastImport, lastExport} = state.settings;
 
   const exportData = async (data) => {
     try {
@@ -48,10 +51,13 @@ const ImportExport = () => {
         type: 'application/json',
         excludedActivityTypes: [],
         url: `file://${filePath}`,
+        failOnCancel: false,
       };
+      await dispatch(setLastExport(moment().format()));
       await Share.open(options);
       setLoading(false);
     } catch (err) {
+      console.log(err);
       setLoading(false);
       setErrored(true);
     }
@@ -96,6 +102,7 @@ const ImportExport = () => {
       });
       const data = await readFile(res);
       setRetrievedData(data);
+      setImport(true);
       setLoading(false);
     } catch (err) {
       if (!DocumentPicker.isCancel(err)) {
@@ -106,21 +113,39 @@ const ImportExport = () => {
   };
 
   const confirmImport = async () => {
-    console.log('trigged');
     setLoading(true);
     const {notebook, settings} = retrievedData;
-    console.log('1');
     await dispatch(restoreSettings(settings));
-    console.log('2');
     await dispatch(restoreNotes(notebook));
-    console.log('3');
+    await dispatch(setLastImport(moment().format()));
     setLoading(false);
-    console.log('4');
+    setImportAchieved(true);
   };
 
   useEffect(() => {
     requestFilePermissions();
   }, []);
+
+  if (isErrored) {
+    return (
+      <View style={style.container}>
+        <View style={style.headerContainer}>
+          <Icon
+            name="arrow-ios-back"
+            width={40}
+            height={40}
+            fill={colors.notification}
+            style={style.headerIcon}
+            onPress={() => navigation.navigate('Settings')}
+          />
+          <Text style={style.headerText}>Import and Export</Text>
+        </View>
+        <ScrollView contentContainerStyle={style.dataContainer}>
+          <Text style={[style.text, style.textCenter]}>An error occurred</Text>
+        </ScrollView>
+      </View>
+    );
+  }
 
   return (
     <View style={style.container}>
@@ -138,14 +163,34 @@ const ImportExport = () => {
       <ScrollView contentContainerStyle={style.dataContainer}>
         {isLoading === true ? (
           <ActivityIndicator size={'large'} color={colors.primary} />
-        ) : (
-          <View style={{flex: 1}}>
+        ) : isImport === false ? (
+          <View style={[style.flex_1, style.center]}>
+            <Text style={[style.text, style.textCenter]}>
+              &#9888; Please make sure the backup file is available offline on
+              your device. &#9888;{'\n\n'}
+              Backup files are always saved on your device at the path:
+              /Carend/Backup/(Date).json
+            </Text>
+          </View>
+        ) : isImportAchieved === false ? (
+          <View style={[style.flex_1, style.center]}>
             <ImportedDataInfo data={retrievedData} />
             <Pressable
               style={style.confirmButton}
               onPress={() => confirmImport()}>
               <Text style={style.buttonText}>Confirm importation</Text>
             </Pressable>
+          </View>
+        ) : (
+          <View style={[style.flex_1, style.center]}>
+            <Icon
+              name="checkmark-outline"
+              width={40}
+              height={40}
+              fill={colors.notification}
+              style={style.ConfirmIcon}
+            />
+            <Text style={[style.text, style.textCenter]}>Import achieved.</Text>
           </View>
         )}
       </ScrollView>
@@ -157,6 +202,12 @@ const ImportExport = () => {
             importData();
           }}>
           <Text style={style.buttonText}>Import</Text>
+          <Text style={style.textHint}>
+            Last import{'\n'}
+            {lastImport === null
+              ? 'Never'
+              : moment(lastImport).format('YYYY-MM-D hh:mm:ss')}
+          </Text>
         </Pressable>
         <Pressable
           disabled={isLoading && canReadAndWrite}
@@ -165,6 +216,12 @@ const ImportExport = () => {
             exportData(state);
           }}>
           <Text style={style.buttonText}>Export</Text>
+          <Text style={style.textHint}>
+            Last export{'\n'}
+            {lastExport === null
+              ? 'Never'
+              : moment(lastExport).format('YYYY-MM-D hh:mm:ss')}
+          </Text>
         </Pressable>
       </View>
     </View>

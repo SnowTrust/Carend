@@ -15,6 +15,9 @@ const IEStyles = () => {
     headerIcon: {
       padding: 10,
     },
+    ConfirmIcon: {
+      padding: 10,
+    },
     headerContainer: {
       flexDirection: 'row',
     },
@@ -50,7 +53,7 @@ const IEStyles = () => {
       alignItems: 'center',
       borderRadius: 10,
     },
-    confirmButton:{
+    confirmButton: {
       margin: 20,
       backgroundColor: colors.primary,
       padding: 5,
@@ -66,6 +69,26 @@ const IEStyles = () => {
       justifyContent: 'center',
       alignItems: 'center',
       flex: 1,
+    },
+    flex_1: {
+      flex: 1,
+    },
+    center: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    text: {
+      color: colors.text,
+    },
+    textCenter: {
+      textAlign: 'center',
+    },
+    textHint: {
+      fontFamily: Poppins.Light,
+      fontSize: 12,
+      height: 'auto',
+      color: colors.text,
+      textAlign: 'center',
     },
   });
 };
