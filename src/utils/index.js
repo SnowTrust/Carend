@@ -19,6 +19,9 @@ import {
   loadCredentials,
   getGreetingTime,
   getMarkedDates,
+  writeFile,
+  deleteFile,
+  readFile,
 } from './functions';
 import welcomeScreenData from './welcomeScreenData';
 
@@ -43,4 +46,7 @@ export {
   getGreetingTime,
   loadCredentials,
   getMarkedDates,
+  writeFile,
+  deleteFile,
+  readFile,
 };

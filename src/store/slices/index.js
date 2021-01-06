@@ -1,9 +1,17 @@
-import notebookReducer, {addNote, updateNote, deleteNote} from './note';
+import notebookReducer, {
+  addNote,
+  updateNote,
+  deleteNote,
+  restoreNotes,
+} from './note';
 import settingsReducer, {
   setDarkTheme,
   setHelperText,
   setUsername,
   setLanguage,
+  setLastExport,
+  setLastImport,
+  restoreSettings,
 } from './settings';
 
 export {
@@ -16,4 +24,8 @@ export {
   setHelperText,
   setLanguage,
   setUsername,
+  setLastExport,
+  setLastImport,
+  restoreSettings,
+  restoreNotes,
 };

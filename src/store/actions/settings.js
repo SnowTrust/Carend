@@ -13,3 +13,19 @@ export const _setUsername = (state, action) => {
 export const _setLanguage = (state, action) => {
   state.language = action.payload;
 };
+
+export const _setLastExport = (state, action) => {
+  state.lastExport = action.payload;
+};
+
+export const _setLasImport = (state, action) => {
+  state.lastImport = action.payload;
+};
+
+export const _restoreSettings = (state, action) => {
+  const {language, username, helperText, darkTheme} = action.payload;
+  state.language = language;
+  state.username = username;
+  state.helperText = helperText;
+  state.darkTheme = darkTheme;
+};
