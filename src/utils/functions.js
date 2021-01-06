@@ -1,5 +1,8 @@
 import moment from 'moment';
+import {ToastAndroid} from 'react-native';
 import * as Keychain from 'react-native-keychain';
+import RNFS from 'react-native-fs';
+import RNFetchBlob from 'rn-fetch-blob';
 
 export const formatNotebooks = (notebooks) => {
   const returnData = [];
@@ -22,7 +25,7 @@ export const formatEntryForCard = (item) => {
 
 export const findEntry = (notebook, date) => {
   const year = moment(date).format('YYYY');
-  const found = notebook[year].find(
+  const found = notebook[year]?.find(
     (entry) =>
       moment(entry.date).format('D-MM-YYYY') ===
       moment(date).format('D-MM-YYYY'),
@@ -76,4 +79,38 @@ export const getMarkedDates = (notebook) => {
     returnData[String(date)] = {marked: true};
   }
   return returnData;
+};
+
+export const writeFile = async (data, fileName) => {
+  try {
+    const filePath = `${RNFS.ExternalStorageDirectoryPath}/Carend/Backup/${fileName}`;
+    await RNFS.mkdir(`${RNFS.ExternalStorageDirectoryPath}/Carend/Backup/`);
+    const srtingifiedData = JSON.stringify(data);
+    const result = await RNFS.writeFile(filePath, srtingifiedData);
+    ToastAndroid.show(`File saved at ${filePath}`, ToastAndroid.LONG);
+    return filePath;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+export const deleteFile = async (filePath) => {
+  try {
+    const result = await RNFS.unlink(filePath);
+    return result;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const readFile = async (res) => {
+  try {
+    const absPath = await RNFetchBlob.fs.stat(res.uri);
+    const result = await RNFS.readFile(absPath.path);
+    const data = await JSON.parse(result);
+    return data;
+  } catch (err) {
+    throw err;
+  }
 };

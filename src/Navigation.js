@@ -9,6 +9,7 @@ import Home from './screens/Home';
 import Write from './screens/Write';
 import Settings from './screens/Settings';
 import Search from './screens/Search';
+import ImportExport from './screens/ImportExport';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,11 @@ const Navigation = () => {
         <Stack.Navigator initialRouteName="Home" headerMode="none">
           <Stack.Screen name="Home" component={Home} options={options} />
           <Stack.Screen name="Write" component={Write} options={options} />
+          <Stack.Screen
+            name="Import-Export"
+            component={ImportExport}
+            options={{...TransitionPresets.ModalPresentationIOS}}
+          />
           <Stack.Screen
             name="Settings"
             component={Settings}

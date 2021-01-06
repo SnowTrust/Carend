@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {_addNote, _updateNote, _deleteNote} from '../actions';
+import {_addNote, _updateNote, _deleteNote, _restoreNotes} from '../actions';
 
 const initialState = {
   notebooks: {
@@ -18,8 +18,14 @@ const notebookSlice = createSlice({
     addNote: _addNote,
     updateNote: _updateNote,
     deleteNote: _deleteNote,
+    restoreNotes: _restoreNotes,
   },
 });
 
 export default notebookSlice.reducer;
-export const {addNote, updateNote, deleteNote} = notebookSlice.actions;
+export const {
+  addNote,
+  updateNote,
+  deleteNote,
+  restoreNotes,
+} = notebookSlice.actions;

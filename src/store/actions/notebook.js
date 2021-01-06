@@ -24,3 +24,7 @@ export const _deleteNote = (state, action) => {
   );
   state.notebooks[notebookId].splice(noteIndex, 1);
 };
+
+export const _restoreNotes = (state, action) => {
+  state.notebooks = action.payload.notebooks;
+};
