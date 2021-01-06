@@ -2,7 +2,7 @@ name: On Push CI
 on:
   push:
     branches:
-      - development
+      - staging
   workflow_dispatch:
 jobs:
   build:
@@ -28,13 +28,13 @@ jobs:
         run: mkdir -p ~/.gradle/ && echo '${{ secrets.GRADLE_PROPERTIES }}' > ~/.gradle/gradle.properties
       - name: Build Release APK
         id: buildRelease
-        run: cd android && USER_HOME=$HOME ./gradlew assembleRelease
-      - name: Upload AAB
+        run: cd android && USER_HOME=$HOME ./gradlew assembleRelease && cd ..
+      - name: Upload APK
         id: uploadArtifact  
         uses: actions/upload-artifact@v1
         with:
             name: app-release.apk
-            path: app/build/outputs/apk/release/app-release.apk
+            path: android/app/build/outputs/apk/release/app-release.apk
       - name: Notify on Slack
         uses: act10ns/slack@v1
         with:
