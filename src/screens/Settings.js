@@ -95,6 +95,23 @@ const Settings = () => {
         style={style.menuItemContainer}
         onPress={() => navigation.navigate('Import-Export')}>
         <View style={style.menuTextContainer}>
+          <Text style={style.menuTextHeader}>Reminders</Text>
+          <Text style={style.menuTextHint}>
+            &#128190; Set reminders to get notifications to write.
+          </Text>
+        </View>
+        <Icon
+          name="arrow-forward-outline"
+          width={20}
+          height={20}
+          fill={colors.text}
+          style={style.menuIcon}
+        />
+      </Pressable>
+      <Pressable
+        style={style.menuItemContainer}
+        onPress={() => navigation.navigate('Import-Export')}>
+        <View style={style.menuTextContainer}>
           <Text style={style.menuTextHeader}>Export or import data</Text>
           <Text style={style.menuTextHint}>
             &#128190; Export or import all the data in and encoded file.
